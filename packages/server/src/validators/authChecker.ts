@@ -12,7 +12,7 @@ declare module "express-session" {
     classId:number;
     groupId: number
 
-    userType: 'student' | 'staff',
+    userType: string,
 
     staffId: number;
 

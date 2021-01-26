@@ -5,6 +5,7 @@ import { Student } from '../../entity/student';
 import { loginType } from './loginInput';
 import { Staff } from '../../entity/staff';
 import { ContextType } from '../../types/contextType';
+import { userTypes } from '../../types/userTypes';
 
 // due to a bug in @types/express-sessions we need to
 // declare module interface
@@ -17,7 +18,7 @@ declare module "express-session" {
     classId:number;
     groupId: number
 
-    userType: 'student' | 'staff',
+    userType: string,
 
     staffId: number;
 
@@ -58,7 +59,7 @@ export class loginResolver {
     if(!valid)
     return undefined;
 
-    ctx.req.session.userType = 'student';
+    ctx.req.session.userType = userTypes.student;
     ctx.req.session.studentId = student.studentId;
     ctx.req.session.email = student.email;
     ctx.req.session.facilityId = student.facility.facilityId;
@@ -87,7 +88,7 @@ export class loginResolver {
     if(!valid)
     return undefined;
 
-    ctx.req.session.userType = 'staff';
+    ctx.req.session.userType = userTypes.staff;
     ctx.req.session.studentId = staff.staffId;
     ctx.req.session.email = staff.email;
     ctx.req.session.facilityId = staff.facility.facilityId;

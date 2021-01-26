@@ -1,8 +1,10 @@
 import {  Authorized, Ctx, FieldResolver, Query, Resolver, Root } from "type-graphql";
+
 import { Student } from '../../entity/student';
 import { Timetable } from '../../entity/timetables';
 import { Enrollment } from '../../entity/enrollments';
 import { ContextType } from '../../types/contextType';
+import { userTypes } from '../../types/userTypes';
 
 // due to a bug in @types/express-sessions we need to
 // declare module interface
@@ -15,7 +17,7 @@ declare module "express-session" {
     classId:number;
     groupId: number;
 
-    userType: 'student' | 'staff',
+    userType: string,
 
     staffId: number;
 
@@ -26,7 +28,7 @@ declare module "express-session" {
 @Resolver(() => Student)
 export class studentResolver {
 
-  @Authorized("student")
+  @Authorized(userTypes.student)
   @Query(() => Student, {nullable: true})
   meStudent(
     @Ctx() ctx:ContextType
