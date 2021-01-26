@@ -35,6 +35,7 @@ const LoginValidationSchema = yup.object().shape({
 export const LoginFormFields: React.FunctionComponent<FormikProps<FormValues> & props> = (props) => {
 
   return (
+    <div style={{width: 300}}>
     <form onSubmit={props.handleSubmit}>
 
       <Field name="email" placeholder="email" prefix={<UserOutlined className="site-form-item-icon" />} component={InputField} />
@@ -55,6 +56,7 @@ export const LoginFormFields: React.FunctionComponent<FormikProps<FormValues> & 
         </Button>
       </Form.Item>
     </form>
+    </div>
   );
 };
 

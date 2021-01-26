@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { LoginForm } from './loginForm';
-
+import { Row, Col } from 'antd';
+import logo from '../../../assets/logo.svg';
 
 export const LoginPage = () => {
 
@@ -10,10 +11,15 @@ export const LoginPage = () => {
   }
 
   return (
-    <div style={{display: 'flex'}}>
-      <div style={{width: 300, margin: 'auto'}}>
-        <LoginForm submit={submit} />
-      </div>
-    </div>
+    <Row style={{height: '100vh'}}>
+      <Col flex={1} style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
+        <div style={{display: 'flex', flexDirection: 'column'}}>
+          <img src={logo} alt="" style={{width: 'auto', height: 60, margin: 'auto', marginBottom: 30}} />
+          <LoginForm submit={submit} />
+        </div>
+      </Col>
+      <Col flex={2} style={{backgroundColor:"#10143A"}}>
+      </Col>
+    </Row>
   );
 };
