@@ -26,7 +26,8 @@ import { AuthCheckerFn } from './validators/authChecker';
       validate: true,
       authChecker: AuthCheckerFn
     }),
-    context: ({ req, res }) => ({ req, res })
+    context: ({ req, res }) => ({ req, res }),
+    tracing: true
   });
 
   const RedisStore = connectRedis(session);

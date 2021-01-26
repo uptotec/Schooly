@@ -1,5 +1,5 @@
 {
-  "name": "schooly",
+  "name": "@schooly/server",
   "version": "0.0.1",
   "devDependencies": {
     "@types/bcrypt": "^3.0.0",

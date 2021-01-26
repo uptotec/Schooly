@@ -5,7 +5,7 @@ import { Student } from '../../entity/student';
 import { loginType } from './loginInput';
 import { Staff } from '../../entity/staff';
 import { ContextType } from '../../types/contextType';
-import { userTypes } from '../../types/userTypes';
+import { userTypes } from '@schooly/common';
 
 // due to a bug in @types/express-sessions we need to
 // declare module interface
