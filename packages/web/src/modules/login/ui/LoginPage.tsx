@@ -18,8 +18,6 @@ export const LoginPage = () => {
           <LoginForm submit={submit} />
         </div>
       </Col>
-      <Col flex={2} style={{backgroundColor:"#10143A"}}>
-      </Col>
     </Row>
   );
 };
