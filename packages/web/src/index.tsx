@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import { client } from './apollo';
 import { Routes } from './routes';
 
-import './index.css';
+import './index.less';
 
 ReactDOM.render(
   <React.StrictMode>

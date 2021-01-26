@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { FormikErrors, FormikProps, withFormik, Field } from 'formik';
 import * as yup from 'yup';
@@ -44,13 +44,13 @@ export const LoginFormFields: React.FunctionComponent<FormikProps<FormValues> & 
         <Form.Item name="remember" valuePropName="checked" noStyle>
           <Checkbox>Remember me</Checkbox>
         </Form.Item>
-        <a className="login-form-forgot" href="" style={{color:'#10143A'}}>
+        <a className="login-form-forgot" href="/login" >
           Forgot password
         </a>
       </Form.Item>
 
       <Form.Item>
-        <Button type="primary" htmlType="submit" className="login-form-button" style={{backgroundColor: '#10143A', borderColor: '#10143A'}}>
+        <Button type="primary" htmlType="submit" className="login-form-button" >
           Log in
         </Button>
       </Form.Item>
