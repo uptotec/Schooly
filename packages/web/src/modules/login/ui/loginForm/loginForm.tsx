@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Form, Button, Checkbox } from 'antd';
+import { Form, Button, Checkbox, Typography } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { FormikErrors, FormikProps, withFormik, Field } from 'formik';
+import { FormikProps, withFormik, Field } from 'formik';
 import * as yup from 'yup';
 
 import styles from './loginForm.module.css';
@@ -13,7 +13,9 @@ interface FormValues {
 }
 
 interface props {
-  submit: (values: FormValues) => Promise<FormikErrors<FormValues> | null>
+  submit: (values: FormValues) => void;
+  errorMsg: boolean
+  loading: boolean
 }
 
 const emailNotLong = "email must be at least 8 characters";
@@ -43,6 +45,8 @@ export const LoginFormFields: React.FunctionComponent<FormikProps<FormValues> & 
       <Field name="email" placeholder="email" prefix={<UserOutlined className="site-form-item-icon" />} component={InputField} />
       <Field name="password" placeholder="password" type="password" prefix={<LockOutlined className="site-form-item-icon" />} component={InputField} />
 
+      <Typography.Text  type="danger">{!props.loading && props.errorMsg ? 'wrong' : ''}</Typography.Text>
+
       <Form.Item>
         <Form.Item name="remember" valuePropName="checked" noStyle>
           <Checkbox>Remember me</Checkbox>
@@ -66,8 +70,7 @@ export const LoginForm = withFormik<props, FormValues>({
   validationSchema: LoginValidationSchema,
   mapPropsToValues: () => ({email: '', password: ''}),
   handleSubmit: async (values, {props, setErrors}) => {
-    const errors = await props.submit(values);
-    if(errors)
-      setErrors(errors);
+    props.submit(values);
+    console.log('here');
   },
 })(LoginFormFields)

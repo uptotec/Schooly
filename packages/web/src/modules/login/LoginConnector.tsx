@@ -4,6 +4,6 @@ import { LoginPage } from './ui/loginPage/LoginPage';
 
 export  const LoginConnector = () => (
   <LoginController>
-    {({submit}) => <LoginPage submit={submit} />}
+    {(data) => <LoginPage {...data} />}
   </LoginController>
 )

@@ -1,24 +1,33 @@
 import * as React from 'react';
-import { gql, useLazyQuery } from '@apollo/client';
+import { ApolloError, gql, useLazyQuery } from '@apollo/client';
+import { Student, LoginType, Maybe } from '../../generated/graphql';
 
+
+interface loginData {
+  studentLogin: Maybe<Student>
+}
+
+export interface LoginControllerData { 
+  submit: (values: any) => void;
+  data: loginData | undefined;
+  loading: boolean;
+  error: ApolloError | undefined
+}
 
 interface props {
   children: (
-    data: { submit: (values: any) => Promise<null> }
+    data: LoginControllerData
   ) => JSX.Element | null;
 }
 
+
 export const LoginController: React.FunctionComponent<props> = (props) => {
 
-  const [login] = useLazyQuery(LOGIN_REQUEST, {onCompleted: data => console.log(data)});
+  const [login, {data, loading, error}] = useLazyQuery<loginData,LoginType>(LOGIN_REQUEST);
 
-  const submit = async (values: any) => {
-    console.log(values);
-    login({variables: values});
-    return null;
-  }
+  const submit = (values: LoginType) => login({variables: values});
 
-  return props.children({submit});
+  return props.children({submit, data, loading, error});
 };
 
 
