@@ -5,19 +5,14 @@ import styles from './loginPage.module.css';
 import { LoginForm } from '../loginForm/loginForm';
 import logo from '../../../../assets/logo.svg';
 
-export const LoginPage = () => {
-
-  const submit = async (values: any) => {
-    console.log(values);
-    return null;
-  }
+export const LoginPage = (props: any) => {
 
   return (
     <Row className={styles.Container}>
       <Col flex={1} className={styles.LogoFormCol}>
         <div className={styles.LogoForm}>
           <img src={logo} alt="" className={styles.Logo} />
-          <LoginForm submit={submit} />
+          <LoginForm submit={props.submit} />
         </div>
       </Col>
     </Row>
