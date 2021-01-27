@@ -1,0 +1,22 @@
+.Container {
+  height: 100vh;
+}
+
+.LogoFormCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.LogoForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.Logo {
+  width: auto;
+  height: 60px;
+  margin: auto;
+  margin-bottom: 30px;
+}

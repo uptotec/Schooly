@@ -3,7 +3,9 @@ import { Form, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { FormikErrors, FormikProps, withFormik, Field } from 'formik';
 import * as yup from 'yup';
-import { InputField } from '../../shared/InputField';
+
+import styles from './loginForm.module.css';
+import { InputField } from '../../../shared/InputField';
 
 interface FormValues {
   email:string,
@@ -35,7 +37,7 @@ const LoginValidationSchema = yup.object().shape({
 export const LoginFormFields: React.FunctionComponent<FormikProps<FormValues> & props> = (props) => {
 
   return (
-    <div style={{width: 300}}>
+    <div className={styles.Container}>
     <Form onFinish={props.handleSubmit}>
 
       <Field name="email" placeholder="email" prefix={<UserOutlined className="site-form-item-icon" />} component={InputField} />

@@ -1,3 +1,3 @@
-import { LoginPage } from './ui/LoginPage';
+import { LoginPage } from './ui/loginPage/LoginPage';
 
 export  const LoginConnector = () => (<LoginPage />)
