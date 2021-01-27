@@ -36,7 +36,7 @@ export const LoginFormFields: React.FunctionComponent<FormikProps<FormValues> & 
 
   return (
     <div style={{width: 300}}>
-    <form onSubmit={props.handleSubmit}>
+    <Form onFinish={props.handleSubmit}>
 
       <Field name="email" placeholder="email" prefix={<UserOutlined className="site-form-item-icon" />} component={InputField} />
       <Field name="password" placeholder="password" type="password" prefix={<LockOutlined className="site-form-item-icon" />} component={InputField} />
@@ -55,7 +55,7 @@ export const LoginFormFields: React.FunctionComponent<FormikProps<FormValues> & 
           Log in
         </Button>
       </Form.Item>
-    </form>
+    </Form>
     </div>
   );
 };
