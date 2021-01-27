@@ -5,7 +5,7 @@ import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
 import session from "express-session";
 import connectRedis from 'connect-redis';
-import cors from 'cors';
+//import cors from 'cors';
 
 import { studentResolver } from "./resolvers/student/studentResolver";
 import { redis } from './redis';
@@ -49,9 +49,9 @@ import { AuthCheckerFn } from './validators/authChecker';
     })
   );
 
-  app.use(cors({credentials: true}));
+  //app.use(cors({origin: 'http://localhost:3000',credentials: true}));
 
-  apolloServer.applyMiddleware({ app, cors: true });
+  apolloServer.applyMiddleware({ app,cors: {origin: 'http://localhost:3000',credentials: true} });
   const port = process.env.PORT || 4000;
   app.listen(port, () => {
     console.log(`server started at http://localhost:${port}/graphql`);
