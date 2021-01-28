@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ApolloError, gql, useLazyQuery } from '@apollo/client';
-import { Student, LoginType, Maybe } from '../../generated/graphql';
+import { Student, LoginType, Maybe } from '../../../generated/graphql';
 
 
 interface loginData {

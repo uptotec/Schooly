@@ -1,42 +1,24 @@
 import * as React from 'react';
-import { Form, Button, Checkbox, Typography } from 'antd';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { Form, Button, Checkbox, Spin } from 'antd';
+import { UserOutlined, LockOutlined, LoadingOutlined } from '@ant-design/icons';
 import { FormikProps, withFormik, Field } from 'formik';
-import * as yup from 'yup';
-
+import { LoginValidationSchema, LoginType } from '@schooly/controller';
 import styles from './loginForm.module.css';
 import { InputField } from '../../../shared/InputField';
 
-interface FormValues {
-  email:string,
-  password: string,
-}
+const antIcon = <LoadingOutlined style={{ fontSize: 22, color: 'white' }} spin />;
 
 interface props {
-  submit: (values: FormValues) => void;
+  submit: (values: LoginType) => void;
   errorMsg: boolean
   loading: boolean
 }
 
-const emailNotLong = "email must be at least 8 characters";
-const passwordNotLong = "email must be at least 8 characters";
-const invalidEmail = "email must be a valid email"
+export const LoginFormFields: React.FunctionComponent<FormikProps<LoginType> & props> = (props) => {
 
-const LoginValidationSchema = yup.object().shape({
-  email: yup
-    .string()
-    .min(8, emailNotLong)
-    .max(255)
-    .email(invalidEmail)
-    .required(),
-  password: yup
-    .string()
-    .min(8, passwordNotLong)
-    .max(255)
-    .required(),
-});
-
-export const LoginFormFields: React.FunctionComponent<FormikProps<FormValues> & props> = (props) => {
+  if(!props.loading && props.errorMsg){
+    props.setErrors({email: ' ', password: 'email or password are wrong'});
+  }
 
   return (
     <div className={styles.Container}>
@@ -44,8 +26,6 @@ export const LoginFormFields: React.FunctionComponent<FormikProps<FormValues> & 
 
       <Field name="email" placeholder="email" prefix={<UserOutlined className="site-form-item-icon" />} component={InputField} />
       <Field name="password" placeholder="password" type="password" prefix={<LockOutlined className="site-form-item-icon" />} component={InputField} />
-
-      <Typography.Text  type="danger">{!props.loading && props.errorMsg ? 'wrong' : ''}</Typography.Text>
 
       <Form.Item>
         <Form.Item name="remember" valuePropName="checked" noStyle>
@@ -58,7 +38,7 @@ export const LoginFormFields: React.FunctionComponent<FormikProps<FormValues> & 
 
       <Form.Item>
         <Button type="primary" htmlType="submit" className="login-form-button" >
-          Log in
+          {props.loading ?  <Spin indicator={antIcon} /> : 'Log in'}
         </Button>
       </Form.Item>
     </Form>
@@ -66,11 +46,8 @@ export const LoginFormFields: React.FunctionComponent<FormikProps<FormValues> & 
   );
 };
 
-export const LoginForm = withFormik<props, FormValues>({
+export const LoginForm = withFormik<props, LoginType>({
   validationSchema: LoginValidationSchema,
   mapPropsToValues: () => ({email: '', password: ''}),
-  handleSubmit: async (values, {props, setErrors}) => {
-    props.submit(values);
-    console.log('here');
-  },
+  handleSubmit: async (values, {props}) => props.submit(values),
 })(LoginFormFields)
