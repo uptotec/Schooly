@@ -3,6 +3,7 @@ import { gql, useLazyQuery } from '@apollo/client';
 import { Student, Maybe, Staff, LoginType } from '../../../generated/graphql';
 import { userTypes } from '@schooly/common';
 import { useUserStore } from '../../../store/user/userStore';
+import { useLoginStore } from '../../../store/login/loginStore';
 
 
 interface Values {
@@ -38,7 +39,7 @@ export const LoginController: React.FunctionComponent<props> = (props) => {
   const [studentLogin, {data: studentData, loading: studentLoading}] = useLazyQuery<studentLoginData,LoginType>(STUDENT_LOGIN_REQUEST);
   const [staffLogin, {data: staffData, loading: staffLoading}] = useLazyQuery<staffLoginData,LoginType>(STAFF_LOGIN_REQUEST);
 
-  const userType = useUserStore(state => state.userType);
+  const userType = useLoginStore(state => state.userType);
   const setLoggedIn = useUserStore(state => state.setLoggedIn);
 
   const submit = (values: Values) => {

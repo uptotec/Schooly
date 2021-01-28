@@ -25,10 +25,10 @@ export const MeController: React.FunctionComponent<props> = (props) => {
   const {loading, data, error} = useQuery<Data,LoginType>(ME_REQUEST);
 
   const setData = useUserStore(state => state.setData);
-
+  
   if(!loading && !!data?.me){
     const {__typename: _, staffId, studentId, ...rest} = data.me;
-
+    
     setData({...rest, loggedIn: true, staffId: staffId || null, studentId: studentId || null});
   }
 

@@ -10,7 +10,7 @@ import logo from '../../../../assets/logo.svg';
 export const LoginPage = (props: LoginControllerData) => {
 
   if(props.success){
-    return <Redirect to="/dashboard" />
+    return <Redirect to="/" />
   }
 
   return (

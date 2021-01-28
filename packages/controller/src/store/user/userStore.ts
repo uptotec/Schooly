@@ -1,7 +1,7 @@
 import create from 'zustand'
 
 type userStore = {
-  userType: string;
+  userType: string | undefined;
   loggedIn: boolean;
   email: string | null| undefined;
   staffId: number | null| undefined;
@@ -15,7 +15,7 @@ type userStore = {
 }
 
 export const useUserStore = create<userStore>(set => ({
-  userType: 'student',
+  userType: undefined,
   loggedIn: false,
   email: undefined,
   staffId: undefined,

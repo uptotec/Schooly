@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Form, Button, Checkbox, Spin, Radio } from 'antd';
 import { UserOutlined, LockOutlined, LoadingOutlined } from '@ant-design/icons';
 import { FormikProps, withFormik, Field } from 'formik';
-import { LoginValidationSchema, useUserStore } from '@schooly/controller';
+import { LoginValidationSchema, useLoginStore } from '@schooly/controller';
 import styles from './loginForm.module.css';
 import { InputField } from '../../../shared/InputField';
 
@@ -22,7 +22,8 @@ interface props {
 
 export const LoginFormFields: React.FunctionComponent<FormikProps<Values> & props> = (props) => {
 
-  const setUserType = useUserStore(state => state.setUserType);
+  const setUserType = useLoginStore(state => state.setUserType);
+  if(props.values.userType)
   setUserType(props.values.userType);
 
   if(!props.loading && props.error){

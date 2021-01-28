@@ -6,7 +6,11 @@ interface props {
   data: MeControllerData
 }
 
-const C : React.FunctionComponent<RouteProps & props> = ({data: {data, loading, error}, component,...rest}) => {
+interface authRouteProps {
+  roles?: string[];
+}
+
+const C : React.FunctionComponent<RouteProps & props & authRouteProps> = ({data: {data, loading, error}, component, children, roles, ...rest}) => {
   
   const RenderedComponent = (props: RouteProps) => {
     
@@ -15,8 +19,20 @@ const C : React.FunctionComponent<RouteProps & props> = ({data: {data, loading, 
 
     if(error)
     return <Redirect to='/login' />
-    
-    const Component = component as any;
+
+    if(data && data.me && roles && roles.length !== 0){
+      let flag = true;
+      for(const role of roles){
+        if(data.me.userType === role){
+          flag = false;
+        }
+        if(flag){
+          return <Redirect to='/' />
+        }
+      }
+    }
+
+    const Component = component as any || children as any;
 
     return <Component {...props} />
   };
@@ -27,7 +43,7 @@ const C : React.FunctionComponent<RouteProps & props> = ({data: {data, loading, 
   )
 }
 
-export const AuthRoute: React.FunctionComponent<RouteProps> = (props) => (
+export const AuthRoute: React.FunctionComponent<RouteProps & authRouteProps> = (props) => (
   <MeController>
       {(data) => <C data={data} {...props} />}
   </MeController>
