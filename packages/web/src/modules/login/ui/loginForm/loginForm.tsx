@@ -1,24 +1,33 @@
 import * as React from 'react';
-import { Form, Button, Checkbox, Spin } from 'antd';
+import { Form, Button, Checkbox, Spin, Radio } from 'antd';
 import { UserOutlined, LockOutlined, LoadingOutlined } from '@ant-design/icons';
 import { FormikProps, withFormik, Field } from 'formik';
-import { LoginValidationSchema, LoginType } from '@schooly/controller';
+import { LoginValidationSchema } from '@schooly/controller';
 import styles from './loginForm.module.css';
 import { InputField } from '../../../shared/InputField';
 
 const antIcon = <LoadingOutlined style={{ fontSize: 22, color: 'white' }} spin />;
 
-interface props {
-  submit: (values: LoginType) => void;
-  errorMsg: boolean
-  loading: boolean
+interface Values {
+  email: string,
+  password: string,
+  userType: 'student' | 'staff',
 }
 
-export const LoginFormFields: React.FunctionComponent<FormikProps<LoginType> & props> = (props) => {
+interface props {
+  submit: (values: Values) => void;
+  errorMsg: boolean;
+  loading: boolean;
+  setUserType: any;
+}
+
+export const LoginFormFields: React.FunctionComponent<FormikProps<Values> & props> = (props) => {
 
   if(!props.loading && props.errorMsg){
     props.setErrors({email: ' ', password: 'email or password are wrong'});
   }
+
+  props.setUserType(props.values.userType);
 
   return (
     <div className={styles.Container}>
@@ -26,6 +35,13 @@ export const LoginFormFields: React.FunctionComponent<FormikProps<LoginType> & p
 
       <Field name="email" placeholder="email" prefix={<UserOutlined className="site-form-item-icon" />} component={InputField} />
       <Field name="password" placeholder="password" type="password" prefix={<LockOutlined className="site-form-item-icon" />} component={InputField} />
+
+      <Form.Item style={{alignSelf: 'center'}}>
+        <Radio.Group name="userType" buttonStyle="solid" onChange={props.handleChange} defaultValue={props.initialValues.userType}>
+          <Radio.Button value={'student'} >Student</Radio.Button>
+          <Radio.Button value={'staff'} >Staff</Radio.Button>
+        </Radio.Group>
+      </Form.Item>
 
       <Form.Item>
         <Form.Item name="remember" valuePropName="checked" noStyle>
@@ -46,8 +62,8 @@ export const LoginFormFields: React.FunctionComponent<FormikProps<LoginType> & p
   );
 };
 
-export const LoginForm = withFormik<props, LoginType>({
+export const LoginForm = withFormik<props, Values>({
   validationSchema: LoginValidationSchema,
-  mapPropsToValues: () => ({email: '', password: ''}),
+  mapPropsToValues: () => ({email: '', password: '', userType: 'student'}),
   handleSubmit: async (values, {props}) => props.submit(values),
 })(LoginFormFields)

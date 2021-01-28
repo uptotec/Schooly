@@ -7,20 +7,32 @@ import styles from './loginPage.module.css';
 import { LoginForm } from '../loginForm/loginForm';
 import logo from '../../../../assets/logo.svg';
 
-export const LoginPage = ({submit, data, loading}: LoginControllerData) => {
+export const LoginPage = ({submit, student, staff}: LoginControllerData) => {
 
-  if(data?.studentLogin){
-    return <Redirect to='/dashboard' />
+  const [userType, setUserType] = React.useState('student');
+
+  let errMsg: boolean = (!!student.data || !!staff.data) && (student.data?.studentLogin === null  || staff.data?.staffLogin === null);
+  let loading: boolean = false;
+
+  if(userType === 'student'){
+    loading = student.loading;
+    if(student.data?.studentLogin){
+      return <Redirect to='/dashboard' />
+    }
+  }else if(userType === 'staff'){
+    loading = staff.loading;
+    if(staff.data?.staffLogin){
+      return <Redirect to='/dashboard' />
+    }
   }
 
-  const errMsg = data?.studentLogin === null;
 
   return (
     <Row className={styles.Container}>
       <Col flex={1} className={styles.LogoFormCol}>
         <div className={styles.LogoForm}>
           <img src={logo} alt="logo" className={styles.Logo} />
-          <LoginForm submit={submit} errorMsg={errMsg} loading={loading} />
+          <LoginForm submit={submit} errorMsg={errMsg} loading={loading} setUserType={setUserType} />
         </div>
       </Col>
     </Row>
