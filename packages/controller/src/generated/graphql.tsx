@@ -17,6 +17,7 @@ export type Query = {
   meStudent?: Maybe<Student>;
   studentLogin?: Maybe<Student>;
   staffLogin?: Maybe<Staff>;
+  me?: Maybe<Me>;
 };
 
 
@@ -120,4 +121,12 @@ export type Staff = {
 export type LoginType = {
   email: Scalars['String'];
   password: Scalars['String'];
+};
+
+export type Me = {
+  __typename?: 'Me';
+  userType: Scalars['String'];
+  email: Scalars['String'];
+  studentId?: Maybe<Scalars['Int']>;
+  staffId?: Maybe<Scalars['Int']>;
 };
