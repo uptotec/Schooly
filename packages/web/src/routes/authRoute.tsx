@@ -7,8 +7,6 @@ interface props {
 }
 
 const C : React.FunctionComponent<RouteProps & props> = ({data: {data, loading, error}, component,...rest}) => {
-
-  console.log('loading: ',loading,data)
   
   const RenderedComponent = (props: RouteProps) => {
     
