@@ -11,6 +11,7 @@ import { studentResolver } from "./resolvers/student/studentResolver";
 import { redis } from './redis';
 import { loginResolver } from './resolvers/login/loginResolver';
 import { AuthCheckerFn } from './validators/authChecker';
+import { meResolver } from './resolvers/me/meResolver';
 
 (async () => {
   const app = express();
@@ -22,7 +23,7 @@ import { AuthCheckerFn } from './validators/authChecker';
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [studentResolver, loginResolver],
+      resolvers: [studentResolver, loginResolver, meResolver],
       validate: true,
       authChecker: AuthCheckerFn
     }),
