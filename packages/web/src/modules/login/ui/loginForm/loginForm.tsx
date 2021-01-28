@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Form, Button, Checkbox, Spin, Radio } from 'antd';
 import { UserOutlined, LockOutlined, LoadingOutlined } from '@ant-design/icons';
 import { FormikProps, withFormik, Field } from 'formik';
-import { LoginValidationSchema } from '@schooly/controller';
+import { LoginValidationSchema, useUserStore } from '@schooly/controller';
 import styles from './loginForm.module.css';
 import { InputField } from '../../../shared/InputField';
 
@@ -16,18 +16,18 @@ interface Values {
 
 interface props {
   submit: (values: Values) => void;
-  errorMsg: boolean;
+  error: boolean;
   loading: boolean;
-  setUserType: any;
 }
 
 export const LoginFormFields: React.FunctionComponent<FormikProps<Values> & props> = (props) => {
 
-  if(!props.loading && props.errorMsg){
+  const setUserType = useUserStore(state => state.setUserType);
+  setUserType(props.values.userType);
+
+  if(!props.loading && props.error){
     props.setErrors({email: ' ', password: 'email or password are wrong'});
   }
-
-  props.setUserType(props.values.userType);
 
   return (
     <div className={styles.Container}>

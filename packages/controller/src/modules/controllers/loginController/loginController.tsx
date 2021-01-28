@@ -2,6 +2,7 @@ import * as React from 'react';
 import { gql, useLazyQuery } from '@apollo/client';
 import { Student, Maybe, Staff, LoginType } from '../../../generated/graphql';
 import { userTypes } from '@schooly/common';
+import { useUserStore } from '../../../store/user/userStore';
 
 
 interface Values {
@@ -20,14 +21,9 @@ interface staffLoginData {
 
 export interface LoginControllerData { 
   submit: (values: Values) => void;
-  student: {
-    data: studentLoginData | undefined;
-    loading: boolean;
-  };
-  staff: {
-    data: staffLoginData | undefined;
-    loading: boolean;
-  }
+  error: boolean;
+  success: boolean;
+  loading: boolean;
 }
 
 interface props {
@@ -42,17 +38,32 @@ export const LoginController: React.FunctionComponent<props> = (props) => {
   const [studentLogin, {data: studentData, loading: studentLoading}] = useLazyQuery<studentLoginData,LoginType>(STUDENT_LOGIN_REQUEST);
   const [staffLogin, {data: staffData, loading: staffLoading}] = useLazyQuery<staffLoginData,LoginType>(STAFF_LOGIN_REQUEST);
 
+  const userType = useUserStore(state => state.userType);
+  const setLoggedIn = useUserStore(state => state.setLoggedIn);
+
   const submit = (values: Values) => {
-    if(values.userType === userTypes.student){
+    if(userType === userTypes.student){
       studentLogin({variables: {email: values.email, password: values.password}});
     }else{
       staffLogin({variables: {email: values.email, password: values.password}});
     }
   };
 
-  return props.children({submit, student: {data: studentData, loading: staffLoading}, staff: {data: staffData, loading: staffLoading}});
-};
+  if(userType === userTypes.student){
+    const error = !!studentData && studentData.studentLogin === null;
+    const success = !!studentData && studentData.studentLogin !== null;
+    if(success)
+      setLoggedIn(true);
+    return props.children({submit, error, success, loading: studentLoading});
+  }else{
+    const error = !!staffData && staffData.staffLogin === null;
+    const success =!!staffData && staffData.staffLogin !== null;
+    if(success)
+      setLoggedIn(true);
+    return props.children({submit, error, success, loading: staffLoading});
+  }
 
+};
 
 const STUDENT_LOGIN_REQUEST = gql`
   query($email: String!, $password: String!) {
