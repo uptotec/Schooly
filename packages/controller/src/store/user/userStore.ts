@@ -12,6 +12,7 @@ type userStore = {
   setStaffId: (staffId:number) => void;
   setStudentId: (studentId:number) => void;
   setData: (data : {userType: string,loggedIn:boolean, email: string, staffId: number | null| undefined, studentId: number | null| undefined}) => void;
+  resetData: () => void
 }
 
 export const useUserStore = create<userStore>(set => ({
@@ -26,4 +27,13 @@ export const useUserStore = create<userStore>(set => ({
   setStaffId: (staffId) => set({staffId}),
   setStudentId: (studentId) => set({studentId}),
   setData: (data) => set({...data}),
+  resetData: () => {
+    set({
+      userType: undefined,
+      loggedIn: false,
+      email: undefined,
+      staffId: undefined,
+      studentId: undefined, 
+    });
+  },
 }))

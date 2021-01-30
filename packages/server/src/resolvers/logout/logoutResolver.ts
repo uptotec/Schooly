@@ -1,4 +1,4 @@
-import {  Authorized, Ctx, Mutation, Resolver } from "type-graphql";
+import { Ctx, Mutation, Resolver } from "type-graphql";
 
 import { ContextType } from '../../types/contextType';
 
@@ -6,7 +6,7 @@ import { ContextType } from '../../types/contextType';
 @Resolver()
 export class logoutResolver {
 
-  @Authorized()
+  //@Authorized()
   @Mutation(() => Boolean)
   logout(
     @Ctx() ctx:ContextType

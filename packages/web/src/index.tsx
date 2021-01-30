@@ -2,8 +2,8 @@ import React from 'react';
 import { ApolloProvider } from '@apollo/client';
 import ReactDOM from 'react-dom';
 
+import { Routes } from './routes/index';
 import { client } from './apollo';
-import { Routes } from './routes';
 
 import './index.less';
 

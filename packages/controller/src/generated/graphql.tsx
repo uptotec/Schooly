@@ -130,3 +130,8 @@ export type Me = {
   studentId?: Maybe<Scalars['Int']>;
   staffId?: Maybe<Scalars['Int']>;
 };
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  logout: Scalars['Boolean'];
+};
