@@ -40,7 +40,7 @@ export class studentResolver {
 
   @FieldResolver()
   timetable(@Root() student: Student) {
-    return Timetable.find({where: {group: student.group}, relations: ["course"]});
+    return Timetable.find({where: {group: student.group}, relations: ["course", "instructor"]});
   }
 
   @FieldResolver()
