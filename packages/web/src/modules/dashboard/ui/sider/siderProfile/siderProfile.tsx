@@ -49,7 +49,11 @@ export const Profile = ({ collapsed }: profileProps) => {
       className={styles.Spacer}
     >
       <Space align="center" className={styles.AvatarSpacer}>
-        <Avatar size={40} className={styles.Avatar}>
+        <Avatar
+          size={40}
+          className={styles.Avatar}
+          style={{ margin: !collapsed ? '0 0 0 15px' : '0 0 0 9px' }}
+        >
           {name![0]}
         </Avatar>
         <Space

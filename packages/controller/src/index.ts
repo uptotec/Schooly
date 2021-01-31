@@ -6,4 +6,5 @@ export * from './generated/graphql';
 export * from './modules/validationSchemas/loginValidationSchema';
 export * from './store/user/userStore';
 export * from './store/login/loginStore';
+export * from './store/logout/logoutStore';
 export * from './store/student/studentStore';
