@@ -1,10 +1,13 @@
 import * as React from 'react';
 import { Layout, Row } from 'antd';
+import { StudentControllerData } from '@schooly/controller';
+
 import { SiderComponent } from '../sider/sider';
 import { DashboardFooter } from '../footer/Footer';
 import { DashboardTitle } from '../content/common/dashboardTitle/title';
 import { StudentDashboardRouter } from '../../../../routes/studentDashboardRoutes';
-import { StudentControllerData } from '@schooly/controller';
+
+import styles from './studentDashboard.module.css';
 
 const { Content } = Layout;
 
@@ -14,10 +17,10 @@ export const StudentDashboard = ({ loading }: StudentControllerData) => {
   }
 
   return (
-    <Layout style={{ minHeight: '100vh', background: '#ffffff' }}>
+    <Layout className={styles.Layout}>
       <SiderComponent />
-      <Layout style={{ background: '#F2F5FA' }}>
-        <Content style={{ margin: '40px 25px' }}>
+      <Layout>
+        <Content className={styles.Content}>
           <Row>
             <DashboardTitle />
           </Row>

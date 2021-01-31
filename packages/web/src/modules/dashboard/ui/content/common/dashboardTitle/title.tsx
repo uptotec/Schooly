@@ -1,5 +1,7 @@
-import { useStudentStore, useUserStore } from '@schooly/controller';
+import { useUserStore } from '@schooly/controller';
 import { Typography } from 'antd';
+
+import styles from './title.module.css';
 
 const { Title, Text } = Typography;
 
@@ -18,12 +20,12 @@ export const DashboardTitle = () => {
       ? 'Good Afternoon'
       : 'Good Evening';
   return (
-    <div style={{ marginBottom: 32 }}>
-      <Title level={2} style={{ fontWeight: 500, margin: 0 }}>
+    <div className={styles.Container}>
+      <Title level={2} className={styles.Title}>
         {`${greeting}, ${getFirstName(name!)}`}
       </Title>
-      <Text style={{ fontWeight: 400, color: '#8a8a8a' }}>
-        Here is what you have for today
+      <Text className={styles.SubTitle}>
+        Here is what you have for {nowHours < 17 ? 'today' : 'tomorrow'}
       </Text>
     </div>
   );

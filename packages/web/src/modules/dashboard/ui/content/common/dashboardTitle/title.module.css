@@ -1,0 +1,13 @@
+.Container {
+  margin-bottom: 32px;
+}
+
+.Title {
+  font-weight: 500 !important;
+  margin: 0px !important;
+}
+
+.SubTitle {
+  font-weight: 400;
+  color: #8a8a8a;
+}

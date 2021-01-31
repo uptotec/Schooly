@@ -2,6 +2,8 @@ import * as React from 'react';
 import { Avatar, Typography, Space } from 'antd';
 import { useStudentStore, useUserStore } from '@schooly/controller';
 
+import styles from './siderProfile.module.css';
+
 const { Title, Text } = Typography;
 
 interface profileProps {
@@ -28,29 +30,11 @@ const Description = () => {
 
   return (
     <>
-      <Title level={5} style={{ fontSize: 13, margin: 0 }}>
+      <Title level={5} className={styles.Name}>
         {getFirstAndLastName(name!)}
       </Title>
-      <Text
-        style={{
-          fontSize: 10,
-          display: 'block',
-          fontWeight: 'bold',
-          color: '#382d2dd9',
-        }}
-      >
-        {department || facility}
-      </Text>
-      <Text
-        style={{
-          fontSize: 10,
-          display: 'block',
-          fontWeight: 'bold',
-          color: '#382d2dd9',
-        }}
-      >
-        Group {group}
-      </Text>{' '}
+      <Text className={styles.Description}>{department || facility}</Text>
+      <Text className={styles.Description}>Group {group}</Text>{' '}
     </>
   );
 };
@@ -62,29 +46,17 @@ export const Profile = ({ collapsed }: profileProps) => {
     <Space
       align={collapsed ? 'center' : 'start'}
       direction="vertical"
-      style={{ width: '100%', marginBottom: 35 }}
+      className={styles.Spacer}
     >
-      <Space align="center" style={{ height: 49 }}>
-        <Avatar
-          size={40}
-          style={{
-            background: '#f56a00',
-            margin: '0 0 0 15px',
-            boxShadow:
-              '-1px 1px 5px rgba(245,106,0,0.2), 1px 1px 5px rgba(245,106,0,0.2)',
-          }}
-        >
+      <Space align="center" className={styles.AvatarSpacer}>
+        <Avatar size={40} className={styles.Avatar}>
           {name![0]}
         </Avatar>
         <Space
           align="start"
           direction="vertical"
           size={0}
-          style={{
-            overflow: 'hidden',
-            whiteSpace: 'nowrap',
-            textOverflow: 'ellipsis',
-          }}
+          className={styles.DescriptionSpacer}
         >
           {!collapsed ? <Description /> : null}
         </Space>

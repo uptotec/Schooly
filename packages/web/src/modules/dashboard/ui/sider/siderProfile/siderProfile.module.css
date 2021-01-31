@@ -1,0 +1,33 @@
+.Name {
+  font-size: 13px !important;
+  margin: 0px !important;
+}
+
+.Description {
+  font-size: 10px;
+  display: block;
+  font-weight: bold;
+  color: #382d2dd9;
+}
+
+.Spacer {
+  width: 100%;
+  margin-bottom: 35px;
+}
+
+.AvatarSpacer {
+  height: 49px;
+}
+
+.Avatar {
+  background: #f56a00 !important;
+  margin: 0 0 0 15px !important;
+  box-shadow: -1px 1px 5px rgba(245, 106, 0, 0.2),
+    1px 1px 5px rgba(245, 106, 0, 0.2);
+}
+
+.DescriptionSpacer {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
