@@ -26,7 +26,7 @@ const X = ({ history, location }: RouteComponentProps) => {
       <Menu.Item
         key="/calendar"
         icon={<CalendarFilled style={{ fontSize: 18 }} />}
-        onClick={() => history.replace('/calender')}
+        onClick={() => history.replace('/calendar')}
       >
         Calendar
       </Menu.Item>
