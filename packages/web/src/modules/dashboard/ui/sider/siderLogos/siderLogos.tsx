@@ -3,7 +3,8 @@ import { Space, Divider } from 'antd';
 
 import logo from '../../../../../assets/logo-colors.svg';
 import logoMini from '../../../../../assets/logo-mini-colors.svg';
-import logo2 from '../../../../../assets/bue-logo-colors.svg';
+import logo2 from '../../../../../assets/svu.svg';
+//import logo2 from '../../../../../assets/bue-logo-colors.svg';
 
 import styles from './siderLogos.module.css';
 

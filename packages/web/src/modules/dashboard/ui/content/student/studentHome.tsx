@@ -1,3 +1,11 @@
+import { Row } from 'antd';
+
+import { DashboardTitle } from '../common/dashboardTitle/title';
+
 export const StudentHome = () => {
-  return <div>Home</div>;
+  return (
+    <Row>
+      <DashboardTitle />
+    </Row>
+  );
 };
