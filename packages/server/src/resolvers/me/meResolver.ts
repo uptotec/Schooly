@@ -17,6 +17,8 @@ declare module "express-session" {
 
     staffId: number;
 
+    name: string;
+
   }
 }
 
@@ -24,6 +26,9 @@ declare module "express-session" {
 class Me {
   @Field()
   userType: string;
+
+  @Field()
+  name: string;
 
   @Field()
   email: string;
@@ -46,7 +51,7 @@ export class meResolver {
   ){
     const session = ctx.req.session;
 
-    return {userType: session.userType, email: session.email, studentId: session.studentId || null, staffId: session.staffId || null};
+    return {userType: session.userType, name: session.name, email: session.email, studentId: session.studentId || null, staffId: session.staffId || null};
   }
 
 }

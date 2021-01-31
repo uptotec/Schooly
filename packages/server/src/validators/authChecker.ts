@@ -16,6 +16,8 @@ declare module "express-session" {
 
     staffId: number;
 
+    name: string;
+
   }
 }
 

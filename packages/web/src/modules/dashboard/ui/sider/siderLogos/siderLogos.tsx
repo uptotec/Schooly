@@ -20,20 +20,20 @@ export const Logos = ({ collapsed }: logosProps) => {
           <img
             src={logo}
             alt="logo"
-            style={{ width: 'auto', height: 35, margin: '15px auto' }}
+            style={{ width: 'auto', height: 30, margin: '15px auto' }}
           />
           <Divider style={{ borderWidth: 2 }} type="vertical" />
           <img
             src={logo2}
             alt="logo"
-            style={{ width: 'auto', height: 35, margin: '15px auto' }}
+            style={{ width: 'auto', height: 30, margin: '15px auto' }}
           />
         </Space>
       ) : (
         <img
           src={logoMini}
           alt="logo"
-          style={{ width: 'auto', height: 35, margin: '15px auto' }}
+          style={{ width: 'auto', height: 30, margin: '15px auto' }}
         />
       )}
     </Space>

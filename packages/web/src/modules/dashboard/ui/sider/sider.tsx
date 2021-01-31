@@ -13,7 +13,7 @@ export const SiderComponent = () => {
       collapsible
       collapsed={collapsed}
       onCollapse={() => setCollapsed(!collapsed)}
-      width={250}
+      width={230}
       theme="light"
       style={{
         overflow: 'auto',

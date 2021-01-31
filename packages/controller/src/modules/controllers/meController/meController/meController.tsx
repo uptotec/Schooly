@@ -3,45 +3,47 @@ import { ApolloError, gql, useQuery } from '@apollo/client';
 import { LoginType, Me } from '../../../../generated/graphql';
 import { useUserStore } from '../../../../store/user/userStore';
 
-export interface MeControllerData { 
-  data: Data | undefined,
-  loading: boolean,
-  error: ApolloError | undefined
+export interface MeControllerData {
+  data: Data | undefined;
+  loading: boolean;
+  error: ApolloError | undefined;
 }
 
 interface props {
-  children: (
-    data: MeControllerData
-  ) => JSX.Element | null;
+  children: (data: MeControllerData) => JSX.Element | null;
 }
 
 interface Data {
-  me: Me
+  me: Me;
 }
 
-
 export const MeController: React.FunctionComponent<props> = (props) => {
+  const { loading, data, error } = useQuery<Data, LoginType>(ME_REQUEST);
 
-  const {loading, data, error} = useQuery<Data,LoginType>(ME_REQUEST);
+  const setData = useUserStore((state) => state.setData);
 
-  const setData = useUserStore(state => state.setData);
-  
-  if(!loading && !!data?.me){
-    const {__typename: _, staffId, studentId, ...rest} = data.me;
-    
-    setData({...rest, loggedIn: true, staffId: staffId || null, studentId: studentId || null});
+  if (!loading && !!data?.me) {
+    const { __typename: _, staffId, studentId, ...rest } = data.me;
+
+    setData({
+      ...rest,
+      loggedIn: true,
+      staffId: staffId || null,
+      studentId: studentId || null,
+    });
   }
 
-  return props.children({data, loading, error});
+  return props.children({ data, loading, error });
 };
 
 const ME_REQUEST = gql`
   query {
-    me{
+    me {
       userType
       email
       staffId
       studentId
+      name
     }
   }
 `;

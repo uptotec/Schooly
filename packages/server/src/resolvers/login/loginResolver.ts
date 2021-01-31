@@ -22,6 +22,8 @@ declare module "express-session" {
 
     staffId: number;
 
+    name: string;
+
   }
 }
 
@@ -61,6 +63,7 @@ export class loginResolver {
 
     ctx.req.session.userType = userTypes.student;
     ctx.req.session.studentId = student.studentId;
+    ctx.req.session.name = student.name;
     ctx.req.session.email = student.email;
     ctx.req.session.facilityId = student.facility.facilityId;
     ctx.req.session.classId = student.class.classId;
@@ -90,6 +93,7 @@ export class loginResolver {
 
     ctx.req.session.userType = userTypes.staff;
     ctx.req.session.studentId = staff.staffId;
+    ctx.req.session.name = staff.name;
     ctx.req.session.email = staff.email;
     ctx.req.session.facilityId = staff.facility.facilityId;
 

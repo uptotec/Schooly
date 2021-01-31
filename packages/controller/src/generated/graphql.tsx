@@ -126,6 +126,7 @@ export type LoginType = {
 export type Me = {
   __typename?: 'Me';
   userType: Scalars['String'];
+  name: Scalars['String'];
   email: Scalars['String'];
   studentId?: Maybe<Scalars['Int']>;
   staffId?: Maybe<Scalars['Int']>;
