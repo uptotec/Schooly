@@ -1,5 +1,5 @@
 import { Switch, Route } from 'react-router-dom';
-import { StudentHome } from '../modules/dashboard/ui/content/student/studentHome';
+import { StudentHome } from '../modules/dashboard/ui/content/student/home/studentHome';
 import { Typography } from 'antd';
 const { Title } = Typography;
 

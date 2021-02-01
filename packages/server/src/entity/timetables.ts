@@ -5,7 +5,7 @@ import { Staff } from './staff';
 import { Field, Int, ObjectType } from 'type-graphql';
 
 export type  Timetable_type = 'lecture' | 'tutorial' | 'lab';
-export type  Timetable_days_type = 'sun' | 'mon' | 'tue' | 'wed' | 'thu' | 'fri';
+export type  Timetable_days_type = 'sat' | 'sun' | 'mon' | 'tue' | 'wed' | 'thu' | 'fri';
 
 @ObjectType()
 @Entity()
@@ -20,11 +20,11 @@ export class Timetable extends BaseEntity {
   type: Timetable_type;
 
   @Field()
-  @Column({type: "enum", enum: ['sun' , 'mon' , 'tue' , 'wed' , 'thu' , 'fri']})
+  @Column({type: "enum", enum: ['sat', 'sun' , 'mon' , 'tue' , 'wed' , 'thu' , 'fri']})
   day: Timetable_days_type;
 
   @Field()
-  @Column({type: "time with time zone"})
+  @Column({type: "time"})
   start_time: string;
 
   @Field(() => Int)
