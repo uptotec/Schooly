@@ -48,6 +48,7 @@ const ME_REQUEST = gql`
         groupId
       }
       timetable {
+        timetableId
         type
         day
         start_time

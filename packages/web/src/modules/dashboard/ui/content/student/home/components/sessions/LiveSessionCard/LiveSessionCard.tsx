@@ -15,7 +15,7 @@ export const LiveSessionCard = ({
   nowDate,
 }: Timetable & { startDate: Date; nowDate: Date }) => {
   const diffMs = nowDate.getTime() - startDate.getTime();
-  const diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000);
+  const diffMins = Math.round(diffMs / 1000 / 60);
   return (
     <div
       style={{

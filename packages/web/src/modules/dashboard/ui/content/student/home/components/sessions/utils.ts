@@ -1,3 +1,5 @@
+import { Timetable } from "@schooly/controller";
+
 export const formatAMPM = (time: string, shift?: number) => {
   let shiftMins = 0;
   let shiftHours = 0;
@@ -60,4 +62,48 @@ export const startEndDates = (startTime: string, durationMins: number) => {
 export const openInNewTab = (url: string) => {
   const newWindow = window.open(url, '_blank', 'noopener,noreferrer');
   if (newWindow) newWindow.opener = null;
+};
+
+export const getSelectedTimetable = ({timeTable, nowDate}: {timeTable: Timetable[] | undefined, nowDate: Date}) => {
+  const days = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+  const nowDay = new Date().getDay();
+
+  let selectedTimetable = timeTable?.filter(
+    (session) => days[nowDay] === session.day
+  );
+
+  let day = 'today';
+
+  if(selectedTimetable?.length === 0){
+    if(nowDate.getTime() < 17){
+      return({day, isSessions: false});
+    }else{
+      selectedTimetable = timeTable?.filter(
+        (session) => days[nowDay + 1] === session.day
+      );
+  
+      day = 'tomorrow';
+
+      if(selectedTimetable?.length === 0){
+        return({day, isSessions: false});
+      }
+    }
+  }
+
+  const lastSession = selectedTimetable![selectedTimetable!.length - 1];
+
+  const { endDate } = startEndDates(
+    lastSession.start_time,
+    lastSession.duration_mins
+  );
+
+  if (nowDate > endDate) {
+    selectedTimetable = timeTable?.filter(
+      (session) => days[nowDay + 1] === session.day
+    );
+
+    day = 'tomorrow';
+  }
+
+  return({day, selectedTimetable, lastSession, isSessions: true});
 };
