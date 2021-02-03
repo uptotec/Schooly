@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Menu } from 'antd';
 import { HomeFilled, CalendarFilled } from '@ant-design/icons';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
-import { HiUserGroup } from 'react-icons/hi';
 import { FaBook, FaCheckSquare, FaClipboardCheck } from 'react-icons/fa';
 
 const X = ({ history, location }: RouteComponentProps) => {

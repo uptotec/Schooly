@@ -20,13 +20,13 @@ export const StudentCalender = () => {
 
   return (
     <>
-      <Row style={{ marginBottom: 20 }}>
+      <Row style={{ marginBottom: 20, width: '100%' }}>
         <Col>
           <Title level={2}>Calender</Title>
         </Col>
       </Row>
-      <Row gutter={50}>
-        <Col>
+      <Row gutter={[25, 25]}>
+        <Col flex="450px">
           <div
             className="ShadowBox"
             style={{ width: 450, borderRadius: 10, padding: 20 }}
@@ -40,8 +40,16 @@ export const StudentCalender = () => {
           </div>
         </Col>
 
-        <Col span={8}>
-          <div className="ShadowBox" style={{ padding: 20, borderRadius: 10 }}>
+        <Col flex="auto">
+          <div
+            className="ShadowBox"
+            style={{
+              padding: 20,
+              borderRadius: 10,
+              maxWidth: 550,
+              minWidth: 450,
+            }}
+          >
             <Title level={3}>Sessions</Title>
             {selectedTimetable?.length ? (
               <SessionsList
