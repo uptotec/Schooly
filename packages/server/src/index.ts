@@ -46,7 +46,7 @@ import { logoutResolver } from './resolvers/logout/logoutResolver';
       cookie: {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
-        maxAge: 3600000 * 24
+        maxAge: 1000 * 60 * 60 * 24 * 7 * 52 * 7
       }
     })
   );

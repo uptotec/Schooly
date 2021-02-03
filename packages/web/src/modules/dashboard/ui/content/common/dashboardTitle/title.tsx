@@ -24,9 +24,9 @@ export const DashboardTitle = () => {
       <Title level={2} className={styles.Title}>
         {`${greeting}, ${getFirstName(name!)}`}
       </Title>
-      <Text className={styles.SubTitle}>
+      {/* <Text className={styles.SubTitle}>
         Here is what you have for {nowHours < 17 ? 'today' : 'tomorrow'}
-      </Text>
+      </Text> */}
     </div>
   );
 };

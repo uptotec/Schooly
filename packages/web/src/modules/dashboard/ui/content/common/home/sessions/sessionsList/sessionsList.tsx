@@ -1,18 +1,22 @@
 import * as React from 'react';
-import { Row } from 'antd';
+import { Row, Typography } from 'antd';
 import { Timetable } from '@schooly/controller';
-import { startEndDates } from '../utils';
+import { startEndDates, formatAMPM } from '../utils';
 import { LiveSessionCard } from '../LiveSessionCard/LiveSessionCard';
 import { SessionCard } from '../sessionCard/SessionCard';
+
+const { Text } = Typography;
 
 export const SessionsList = ({
   timeTable,
   nowDate,
   isTomorrow,
+  lastSession,
 }: {
   timeTable: Timetable[];
   nowDate: Date;
   isTomorrow: boolean;
+  lastSession: Timetable;
 }) => {
   return (
     <>
@@ -21,6 +25,7 @@ export const SessionsList = ({
           session.start_time,
           session.duration_mins
         );
+
         if (nowDate >= startDate && nowDate < endDate && !isTomorrow) {
           return (
             <Row key={`${session.timetableId}`}>
@@ -32,12 +37,19 @@ export const SessionsList = ({
             </Row>
           );
         }
+
         return (
           <Row key={`${session.timetableId}`}>
             <SessionCard {...session} />
           </Row>
         );
       })}
+      <Row align="middle" justify="center">
+        <Text>
+          Your day ends at{' '}
+          {formatAMPM(lastSession.start_time, lastSession.duration_mins)} 🙌
+        </Text>
+      </Row>
     </>
   );
 };

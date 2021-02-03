@@ -1,0 +1,21 @@
+.SessionCard {
+  width: 90%;
+  margin: auto;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.SessionCardCircle {
+  border-radius: 50%;
+  padding: 8px;
+  margin: 20px 5px 20px 30px;
+}
+
+.CircleText {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

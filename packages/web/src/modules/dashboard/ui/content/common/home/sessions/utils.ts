@@ -100,9 +100,11 @@ export const getSelectedTimetable = ({timeTable, nowDate}: {timeTable: Timetable
   if (nowDate > endDate) {
     selectedTimetable = timeTable?.filter(
       (session) => days[nowDay + 1] === session.day
-    );
-
-    day = 'tomorrow';
+      );
+      day = 'tomorrow';
+      if(selectedTimetable?.length === 0){
+        return({day, isSessions: false});
+      }
   }
 
   return({day, selectedTimetable, lastSession, isSessions: true});

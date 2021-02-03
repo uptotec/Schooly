@@ -1,7 +1,10 @@
 import * as React from 'react';
 import { Button, Col, Progress, Row, Typography } from 'antd';
 import { Timetable } from '@schooly/controller';
+
 import { formatAMPM, openInNewTab } from '../utils';
+
+import styles from './LiveSessionCard.module.css';
 
 const { Title, Text } = Typography;
 
@@ -16,28 +19,11 @@ export const LiveSessionCard = ({
 }: Timetable & { startDate: Date; nowDate: Date }) => {
   const diffMs = nowDate.getTime() - startDate.getTime();
   const diffMins = Math.round(diffMs / 1000 / 60);
+
   return (
-    <div
-      style={{
-        background: '#F6F7F7',
-        width: '90%',
-        margin: 'auto',
-        borderRadius: 10,
-        boxShadow:
-          '8px 8px 12px rgba(0, 0, 0, 0.03) inset,-8px -8px 12px rgba(255, 255, 255, 0.8) inset',
-        marginBottom: 20,
-      }}
-    >
+    <div className={`InsetShadowBox ${styles.SessionCard}`}>
       <Row gutter={20} align="middle">
-        <Col
-          style={{
-            borderRadius: '50%',
-            padding: 8,
-            boxShadow:
-              '8px 8px 12px rgba(0, 0, 0, 0.03),-8px -8px 12px rgba(255, 255, 255, 1)',
-            margin: '15px 0px 15px 30px',
-          }}
-        >
+        <Col className={`ShadowBox ${styles.SessionCardCircle}`}>
           <Progress
             type="circle"
             percent={(diffMins / duration_mins) * 100}
@@ -58,12 +44,10 @@ export const LiveSessionCard = ({
       </Row>
       <Row justify="center" align="middle">
         <Button
+          className="ShadowBox"
           style={{
             borderRadius: 10,
-            //background: 'linear-gradient(145deg, #f0f0f0, #cacaca)',
             background: '#3F90FF',
-            boxShadow:
-              '8px 8px 12px rgba(0, 0, 0, 0.03),-8px -8px 12px rgba(255, 255, 255, 1)',
             height: 35,
             width: '100%',
           }}
