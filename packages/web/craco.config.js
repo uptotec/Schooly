@@ -7,7 +7,7 @@ module.exports = {
       options: {
         lessLoaderOptions: {
           lessOptions: {
-            modifyVars: { '@input-bg': 'transparent' },
+            modifyVars: { '@input-bg': 'transparent', '@calendar-bg': 'transparent', '@calendar-input-bg': 'transparent' },
             javascriptEnabled: true,
           },
         },

@@ -38,13 +38,6 @@ const X = ({ history, location }: RouteComponentProps) => {
         Tasks
       </Menu.Item>
       <Menu.Item
-        key="/sessions"
-        icon={<HiUserGroup size={18} />}
-        onClick={() => history.replace('/sessions')}
-      >
-        Sessions
-      </Menu.Item>
-      <Menu.Item
         key="/grades"
         icon={<FaCheckSquare size={18} />}
         onClick={() => history.replace('/grades')}

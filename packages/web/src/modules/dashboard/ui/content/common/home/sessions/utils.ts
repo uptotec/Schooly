@@ -101,8 +101,9 @@ export const getSelectedTimetable = ({timeTable, nowDate}: {timeTable: Timetable
   );
 
   if (nowDate > endDate) {
+    nowDate.setDate(nowDate.getDate() + 1);
     selectedTimetable = timeTable?.filter(
-      (session) => days[nowDay + 1] === session.day
+      (session) => (session.recurring && days[nowDay + 1] === session.day) || (!session.recurring && nowDate.toDateString() === new Date(session.date!).toDateString())
       );
       day = 'tomorrow';
       if(selectedTimetable?.length === 0){
