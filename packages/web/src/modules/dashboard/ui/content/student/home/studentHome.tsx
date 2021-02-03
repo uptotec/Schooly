@@ -16,7 +16,7 @@ export const StudentHome = () => {
         <Col flex={1} className={`ShadowBox ${styles.SessionsColum}`}>
           <SessionsColum />
         </Col>
-        <Col flex={8}></Col>
+        <Col flex={10}></Col>
       </Row>
     </>
   );

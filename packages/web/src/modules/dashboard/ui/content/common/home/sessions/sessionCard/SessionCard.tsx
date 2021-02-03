@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Col, Row, Typography } from 'antd';
 import { Timetable } from '@schooly/controller';
+import { FaRegBuilding } from 'react-icons/fa';
+import { CgMediaLive } from 'react-icons/cg';
 
 import { formatAMPM } from '../utils';
 
@@ -13,27 +15,45 @@ export const SessionCard = ({
   course,
   duration_mins,
   start_time,
+  online,
 }: Timetable) => {
   return (
     <div className={`InsetShadowBox ${styles.SessionCard}`}>
-      <Row gutter={20} align="middle">
-        <Col className={`ShadowBox ${styles.SessionCardCircle}`}>
-          <div className={styles.CircleText}>
-            <Title level={4} style={{ margin: 0, fontSize: 18 }}>
-              {duration_mins >= 60 ? duration_mins / 60 : duration_mins}
-            </Title>
-            <Title level={5} style={{ margin: 0, fontSize: 14 }}>
-              {duration_mins >= 60 ? 'Hours' : 'Minutes'}
-            </Title>
-          </div>
+      <Row align="middle" justify="space-between">
+        <Col>
+          <Row align="middle" gutter={20}>
+            <Col className={`ShadowBox ${styles.SessionCardCircle}`}>
+              <div className={styles.CircleText}>
+                <Title level={4} style={{ margin: 0, fontSize: 18 }}>
+                  {duration_mins >= 60 ? duration_mins / 60 : duration_mins}
+                </Title>
+                <Title level={5} style={{ margin: 0, fontSize: 14 }}>
+                  {duration_mins >= 60 ? 'Hours' : 'Minutes'}
+                </Title>
+              </div>
+            </Col>
+            <Col>
+              <Title level={5} style={{ margin: 0 }}>
+                {`${course.name} ${type}`}
+              </Title>
+              <Text style={{ color: '#7C7C7C', fontSize: 14 }}>
+                Starts at {formatAMPM(start_time)}
+              </Text>
+            </Col>
+          </Row>
         </Col>
         <Col>
-          <Title level={5} style={{ margin: 0 }}>
-            {`${course.name} ${type}`}
-          </Title>
-          <Text style={{ color: '#7C7C7C', fontSize: 14 }}>
-            Starts at {formatAMPM(start_time)}
-          </Text>
+          {!online ? (
+            <div className={styles.OnCampus_Online}>
+              <FaRegBuilding color="#7c7c7c" size={24} />
+              <Text style={{ color: '#7c7c7c' }}>on campus</Text>
+            </div>
+          ) : (
+            <div className={styles.OnCampus_Online}>
+              <CgMediaLive color="#7c7c7c" size={26} />
+              <Text style={{ color: '#7c7c7c' }}>online session</Text>
+            </div>
+          )}
         </Col>
       </Row>
     </div>
