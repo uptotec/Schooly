@@ -20,7 +20,19 @@ export class Timetable extends BaseEntity {
   type: Timetable_type;
 
   @Field()
-  @Column({type: "enum", enum: ['sat', 'sun' , 'mon' , 'tue' , 'wed' , 'thu' , 'fri']})
+  @Column()
+  online: boolean;
+
+  @Field()
+  @Column()
+  recurring: boolean;
+
+  @Field({nullable: true})
+  @Column({type: 'date', nullable: true})
+  date: string;
+
+  @Field({nullable: true})
+  @Column({type: "enum", enum: ['sat', 'sun' , 'mon' , 'tue' , 'wed' , 'thu' , 'fri'], nullable: true})
   day: Timetable_days_type;
 
   @Field()
@@ -32,7 +44,7 @@ export class Timetable extends BaseEntity {
   duration_mins: number;
 
   @Field({nullable: true})
-  @Column()
+  @Column({nullable: true})
   joinLink: string
 
   @Field(() => Course)

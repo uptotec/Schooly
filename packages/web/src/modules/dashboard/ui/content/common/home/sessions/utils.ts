@@ -69,8 +69,10 @@ export const getSelectedTimetable = ({timeTable, nowDate}: {timeTable: Timetable
   const nowDay = new Date().getDay();
 
   let selectedTimetable = timeTable?.filter(
-    (session) => days[nowDay] === session.day
+    (session) => (session.recurring && days[nowDay] === session.day) || (!session.recurring && nowDate.toDateString() === new Date(session.date!).toDateString())
   );
+
+  console.log(selectedTimetable)
 
   let day = 'today';
 
@@ -78,8 +80,9 @@ export const getSelectedTimetable = ({timeTable, nowDate}: {timeTable: Timetable
     if(nowDate.getTime() < 17){
       return({day, isSessions: false});
     }else{
+      nowDate.setDate(nowDate.getDate() + 1);
       selectedTimetable = timeTable?.filter(
-        (session) => days[nowDay + 1] === session.day
+        (session) => (session.recurring && days[nowDay + 1] === session.day) || (!session.recurring && nowDate.toDateString() === new Date(session.date!).toDateString())
       );
   
       day = 'tomorrow';

@@ -49,6 +49,9 @@ const ME_REQUEST = gql`
       }
       timetable {
         timetableId
+        recurring
+        online
+        date
         type
         day
         start_time

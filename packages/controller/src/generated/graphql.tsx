@@ -97,7 +97,10 @@ export type Timetable = {
   __typename?: 'Timetable';
   timetableId: Scalars['Int'];
   type: Scalars['String'];
-  day: Scalars['String'];
+  online: Scalars['Boolean'];
+  recurring: Scalars['Boolean'];
+  date?: Maybe<Scalars['String']>;
+  day?: Maybe<Scalars['String']>;
   start_time: Scalars['String'];
   duration_mins: Scalars['Int'];
   joinLink?: Maybe<Scalars['String']>;
