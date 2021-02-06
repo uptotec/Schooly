@@ -13,6 +13,7 @@ import { loginResolver } from './resolvers/login/loginResolver';
 import { AuthCheckerFn } from './validators/authChecker';
 import { meResolver } from './resolvers/me/meResolver';
 import { logoutResolver } from './resolvers/logout/logoutResolver';
+import { sessionResolver } from './resolvers/session/onlineSessionResolver';
 
 (async () => {
   const app = express();
@@ -24,7 +25,7 @@ import { logoutResolver } from './resolvers/logout/logoutResolver';
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [studentResolver, loginResolver, meResolver, logoutResolver],
+      resolvers: [studentResolver, loginResolver, meResolver, logoutResolver, sessionResolver],
       validate: true,
       authChecker: AuthCheckerFn
     }),

@@ -18,6 +18,7 @@ export type Query = {
   studentLogin?: Maybe<Student>;
   staffLogin?: Maybe<Staff>;
   me?: Maybe<Me>;
+  sessionJWT: Scalars['String'];
 };
 
 

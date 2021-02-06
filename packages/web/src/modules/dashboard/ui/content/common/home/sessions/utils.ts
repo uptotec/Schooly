@@ -60,6 +60,9 @@ export const startEndDates = (startTime: string, durationMins: number) => {
 };
 
 export const openInNewTab = (url: string) => {
+  if(!url.startsWith('http')){
+    url = `session/${url}`
+  }
   const newWindow = window.open(url, '_blank', 'noopener,noreferrer');
   if (newWindow) newWindow.opener = null;
 };
