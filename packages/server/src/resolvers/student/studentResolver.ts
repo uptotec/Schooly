@@ -5,6 +5,7 @@ import { Timetable } from '../../entity/timetables';
 import { Enrollment } from '../../entity/enrollments';
 import { ContextType } from '../../types/contextType';
 import { userTypes } from '@schooly/common';
+import { Grade } from '../../entity/grade';
 
 // due to a bug in @types/express-sessions we need to
 // declare module interface
@@ -50,4 +51,8 @@ export class studentResolver {
     return Enrollment.find({where: {group: student.group}, relations: ['course', 'teacher', 'teacherAssistant']});
   }
 
+  @FieldResolver()
+  grades(@Root() student: Student) {
+    return Grade.find({where: {student}, relations: ['exam', 'exam.enrollment', 'gradeLetter']});
+  }
 }

@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Field, Float, Int, ObjectType } from "type-graphql";
 import { Exam } from './Exam';
 import { Student } from './student';
@@ -6,20 +6,20 @@ import { GradeLetter } from './gradeLetter';
 
 @ObjectType()
 @Entity()
-export class Grade {
+export class Grade extends BaseEntity {
 
   @Field(() => Int)
   @PrimaryGeneratedColumn()
   gradeId: number;
 
-  @Field(() => Float)
+  @Field(() => Float, {nullable: true})
   @Column()
   score: number;
 
-  @Field({nullable: true})
+  @Field(() => GradeLetter,{nullable: true})
   @OneToOne(() => GradeLetter, {nullable: true})
   @JoinColumn({name: 'letterId'})
-  scoreLetter: GradeLetter;
+  gradeLetter: GradeLetter;
 
   @Field(() => Exam)
   @ManyToOne(() => Exam, exam => exam.grades)

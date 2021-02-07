@@ -11,15 +11,15 @@ export class GradeLetter {
   gradeLetterId: number;
 
   @Field()
-  @Column({length: 1})
+  @Column({length: 2})
   Letter: string;
 
   @Field(() => Float)
-  @Column()
+  @Column('float')
   min: number;
 
   @Field(() => Float)
-  @Column()
+  @Column('float')
   max: number;
 
   @Field(() => GradeSystem)
