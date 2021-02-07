@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { Menu } from 'antd';
-import { HomeFilled, CalendarFilled } from '@ant-design/icons';
+import { HomeFilled, CalendarFilled, MailFilled } from '@ant-design/icons';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { FaBook, FaCheckSquare, FaClipboardCheck } from 'react-icons/fa';
+import { openInNewTab } from '../../content/common/home/sessions/utils';
 
 const X = ({ history, location }: RouteComponentProps) => {
   const defaultPath = location.pathname;
@@ -43,6 +44,13 @@ const X = ({ history, location }: RouteComponentProps) => {
       >
         Grades
       </Menu.Item>
+      {/* <Menu.Item
+        key="mail"
+        icon={<MailFilled style={{ fontSize: 18 }} />}
+        onClick={() => openInNewTab('https://outlook.office.com/')}
+      >
+        Mail
+      </Menu.Item> */}
     </Menu>
   );
 };

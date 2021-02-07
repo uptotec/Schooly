@@ -54,7 +54,7 @@ import { sessionResolver } from './resolvers/session/onlineSessionResolver';
 
   //app.use(cors({origin: 'http://localhost:3000',credentials: true}));
 
-  apolloServer.applyMiddleware({ app,cors: {origin: 'http://localhost:3000',credentials: true} });
+  apolloServer.applyMiddleware({ app,cors: {origin: ['http://localhost:3000', 'http://192.168.1.8:3000'],credentials: true} });
   const port = process.env.PORT || 4000;
   app.listen(port, () => {
     console.log(`server started at http://localhost:${port}/graphql`);
