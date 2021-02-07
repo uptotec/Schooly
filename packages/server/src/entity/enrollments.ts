@@ -3,6 +3,7 @@ import { BaseEntity, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } fro
 import { Course } from "./course";
 import { Group } from './group';
 import { Staff } from './staff';
+import { Exam } from './Exam';
 
 @ObjectType()
 @Entity()
@@ -31,5 +32,8 @@ export class Enrollment extends BaseEntity {
   @ManyToOne(() => Staff, staff => staff.teacherAssistantEnrollments)
   @JoinColumn({name: "teacherAssistantId"})
   teacherAssistant: Staff;
+
+  @Field(() => [Exam])
+  exams: Exam[]
 
 }

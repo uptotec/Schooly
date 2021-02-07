@@ -1,10 +1,11 @@
-import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Facility } from './facility';
 import { Class } from './class';
 import { Group } from './group';
 import { Field, Int, ObjectType } from "type-graphql";
 import { Timetable } from './timetables';
 import { Enrollment } from "./enrollments";
+import { Grade } from './grade';
 
 @ObjectType()
 @Entity()
@@ -43,6 +44,10 @@ export class Student extends BaseEntity {
   @ManyToOne(() => Group, group => group.students)
   @JoinColumn({name: "groupId"})
   group: Group;
+
+  @Field(() => [Grade])
+  @OneToMany(() => Grade, grade => grade.student)
+  grades: Grade[];
 
   @Field(() => [Timetable])
   timetable: Timetable[];
