@@ -2,6 +2,7 @@ import * as React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import { SessionConnector } from '../modules/session/sessionConnector';
+import { LoadingSpinner } from '../modules/shared/loadingSpinner';
 import { AuthRoute } from './authRoute';
 
 const LoginConnector = React.lazy(() =>
@@ -21,7 +22,7 @@ const DashboardConnector = React.lazy(() =>
 export const Routes = () => {
   return (
     <BrowserRouter>
-      <React.Suspense fallback={<div>Loading...</div>}>
+      <React.Suspense fallback={<LoadingSpinner />}>
         <Switch>
           <Route exact path="/login" component={LoginConnector} />
           <AuthRoute exact path="/session/:id" component={SessionConnector} />

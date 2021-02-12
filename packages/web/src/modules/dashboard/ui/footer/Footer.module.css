@@ -5,3 +5,9 @@
   align-items: center;
   background: #fff !important;
 }
+
+@media (max-width: 992px) {
+  .Footer {
+    display: none;
+  }
+}

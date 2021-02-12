@@ -22,7 +22,7 @@ export const StudentDashboard = ({ loading }: StudentControllerData) => {
         <Content className={styles.Content}>
           <StudentDashboardRouter />
         </Content>
-        <DashboardFooter />
+        {/* <DashboardFooter /> */}
       </Layout>
     </Layout>
   );

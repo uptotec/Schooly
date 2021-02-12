@@ -2,6 +2,7 @@ import { Switch, Route } from 'react-router-dom';
 import { StudentHome } from '../modules/dashboard/ui/content/student/home/studentHome';
 import { Typography } from 'antd';
 import { StudentCalender } from '../modules/dashboard/ui/content/student/calender/studentCalender';
+import { StudentGradesConnector } from '../modules/dashboard/ui/content/student/grades/studentGradesConnector';
 const { Title } = Typography;
 
 export const StudentDashboardRouter = () => {
@@ -19,11 +20,7 @@ export const StudentDashboardRouter = () => {
         path="/tasks"
         component={() => <Title level={2}>Tasks</Title>}
       />
-      <Route
-        exact
-        path="/grades"
-        component={() => <Title level={2}>Grades</Title>}
-      />
+      <Route exact path="/grades" component={StudentGradesConnector} />
     </Switch>
   );
 };

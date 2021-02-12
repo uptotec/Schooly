@@ -33,25 +33,44 @@ export const SessionCard = ({
               </div>
             </Col>
             <Col>
-              <Title level={5} style={{ margin: 0 }}>
+              <Title level={5} style={{ margin: 0 }} className={styles.Title}>
                 {`${course.name} ${type}`}
               </Title>
               <Text style={{ color: '#7C7C7C', fontSize: 14 }}>
                 Starts at {formatAMPM(start_time)}
               </Text>
+              <Text className={styles.LocationText}>online session</Text>
             </Col>
           </Row>
         </Col>
         <Col>
           {!online ? (
             <div className={styles.OnCampus_Online}>
-              <FaRegBuilding color="#7c7c7c" size={24} />
-              <Text style={{ color: '#7c7c7c' }}>on campus</Text>
+              <FaRegBuilding
+                color="#7c7c7c"
+                size={24}
+                className={styles.LocationIcon}
+              />
+              <Text
+                style={{ color: '#7c7c7c' }}
+                className={styles.LocationIcon}
+              >
+                on campus
+              </Text>
             </div>
           ) : (
             <div className={styles.OnCampus_Online}>
-              <CgMediaLive color="#7c7c7c" size={26} />
-              <Text style={{ color: '#7c7c7c' }}>online session</Text>
+              <CgMediaLive
+                color="#7c7c7c"
+                size={26}
+                className={styles.LocationIcon}
+              />
+              <Text
+                style={{ color: '#7c7c7c' }}
+                className={styles.LocationIcon}
+              >
+                online session
+              </Text>
             </div>
           )}
         </Col>

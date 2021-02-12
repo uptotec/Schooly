@@ -3,5 +3,11 @@
 }
 
 .Content {
-  margin: 40px 60px;
+  margin: 4em 2em;
+}
+
+@media (max-width: 992px) {
+  .Content {
+    margin-top: 10px;
+  }
 }

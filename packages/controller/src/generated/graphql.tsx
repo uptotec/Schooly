@@ -40,6 +40,7 @@ export type Student = {
   facility: Facility;
   class: Class;
   group: Group;
+  grades: Array<Grade>;
   timetable: Array<Timetable>;
   courses: Array<Enrollment>;
 };
@@ -83,6 +84,7 @@ export type Enrollment = {
   group: Group;
   teacher: Staff;
   teacherAssistant: Staff;
+  exams: Array<Exam>;
 };
 
 export type Course = {
@@ -120,6 +122,43 @@ export type Staff = {
   teacherEnrollments: Array<Enrollment>;
   teacherAssistantEnrollments: Array<Enrollment>;
   timetable: Array<Timetable>;
+};
+
+export type Exam = {
+  __typename?: 'Exam';
+  examId: Scalars['Int'];
+  name: Scalars['String'];
+  publishedNumber: Scalars['Boolean'];
+  publishedLetter: Scalars['Boolean'];
+  totalScore: Scalars['Float'];
+  percentage: Scalars['Float'];
+  enrollment: Array<Enrollment>;
+  grades: Grade;
+};
+
+export type Grade = {
+  __typename?: 'Grade';
+  gradeId: Scalars['Int'];
+  score?: Maybe<Scalars['Float']>;
+  gradeLetter?: Maybe<GradeLetter>;
+  exam: Exam;
+  student: Student;
+};
+
+export type GradeLetter = {
+  __typename?: 'GradeLetter';
+  gradeLetterId: Scalars['Int'];
+  Letter: Scalars['String'];
+  min: Scalars['Float'];
+  max: Scalars['Float'];
+  gradeSystem: GradeSystem;
+};
+
+export type GradeSystem = {
+  __typename?: 'GradeSystem';
+  gradeSystemId: Scalars['Int'];
+  name: Scalars['String'];
+  gradeLetters: Array<GradeLetter>;
 };
 
 export type LoginType = {

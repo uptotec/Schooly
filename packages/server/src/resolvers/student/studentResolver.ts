@@ -53,6 +53,6 @@ export class studentResolver {
 
   @FieldResolver()
   grades(@Root() student: Student) {
-    return Grade.find({where: {student}, relations: ['exam', 'exam.enrollment', 'gradeLetter']});
+    return Grade.find({where: {student}, relations: ['exam', 'exam.enrollment','exam.enrollment.course', 'gradeLetter']});
   }
 }

@@ -1,50 +1,48 @@
 import * as React from 'react';
 import { Redirect, Route, RouteProps } from 'react-router-dom';
 import { MeController, MeControllerData } from '@schooly/controller';
+import { LoadingSpinner } from '../modules/shared/loadingSpinner';
 
 interface props {
-  data: MeControllerData
+  data: MeControllerData;
 }
 
 interface authRouteProps {
   roles?: string[];
 }
 
-const C : React.FunctionComponent<RouteProps & props & authRouteProps> = ({data: {data, loading, error}, component, children, roles, ...rest}) => {
-  
+const C: React.FunctionComponent<RouteProps & props & authRouteProps> = ({
+  data: { data, loading, error },
+  component,
+  children,
+  roles,
+  ...rest
+}) => {
   const RenderedComponent = (props: RouteProps) => {
-    
-    if(loading)
-    return null
+    if (loading) return <LoadingSpinner />;
 
-    if(error)
-    return <Redirect to='/login' />
+    if (error) return <Redirect to="/login" />;
 
-    if(data && data.me && roles && roles.length !== 0){
+    if (data && data.me && roles && roles.length !== 0) {
       let flag = true;
-      for(const role of roles){
-        if(data.me.userType === role){
+      for (const role of roles) {
+        if (data.me.userType === role) {
           flag = false;
         }
-        if(flag){
-          return <Redirect to='/' />
+        if (flag) {
+          return <Redirect to="/" />;
         }
       }
     }
 
-    const Component = component as any || children as any;
+    const Component = (component as any) || (children as any);
 
-    return <Component {...props} />
+    return <Component {...props} />;
   };
 
+  return <Route {...rest} render={RenderedComponent} />;
+};
 
-  return (
-    <Route {...rest} render={RenderedComponent} />
-  )
-}
-
-export const AuthRoute: React.FunctionComponent<RouteProps & authRouteProps> = (props) => (
-  <MeController>
-      {(data) => <C data={data} {...props} />}
-  </MeController>
-);
+export const AuthRoute: React.FunctionComponent<RouteProps & authRouteProps> = (
+  props
+) => <MeController>{(data) => <C data={data} {...props} />}</MeController>;

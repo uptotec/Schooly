@@ -42,20 +42,27 @@ export const LiveSessionCard = ({
               <Title level={5} style={{ margin: 0 }}>
                 {`${course.name} ${type}`}
               </Title>
-              <Text style={{ color: '#7C7C7C', fontSize: 14 }}>
-                LIVE NOW! - Ends at {formatAMPM(start_time, duration_mins)}
+              <Text
+                style={{ color: '#7C7C7C', fontSize: 14 }}
+                className={styles.LiveNow}
+              >
+                {`LIVE NOW! - `}
               </Text>
+              <Text style={{ color: '#7C7C7C', fontSize: 14 }}>
+                Ends at {formatAMPM(start_time, duration_mins)}
+              </Text>
+              <Text className={styles.LocationText}>online session</Text>
             </Col>
           </Row>
         </Col>
         <Col>
           {!online ? (
-            <div className={styles.OnCampus_Online}>
+            <div className={`${styles.OnCampus_Online} ${styles.LocationIcon}`}>
               <FaRegBuilding color="#7c7c7c" size={24} />
               <Text style={{ color: '#7c7c7c' }}>on campus</Text>
             </div>
           ) : (
-            <div className={styles.OnCampus_Online}>
+            <div className={`${styles.OnCampus_Online} ${styles.LocationIcon}`}>
               <CgMediaLive color="#7c7c7c" size={26} />
               <Text style={{ color: '#7c7c7c' }}>online session</Text>
             </div>

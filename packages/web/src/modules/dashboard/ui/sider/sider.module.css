@@ -6,3 +6,9 @@
   top: 0;
   box-shadow: 2px 2px 5px rgba(41, 128, 185, 0.05);
 }
+
+@media (max-width: 992px) {
+  .Sider {
+    display: none;
+  }
+}
