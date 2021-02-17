@@ -5,7 +5,6 @@ import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
 import session from "express-session";
 import connectRedis from 'connect-redis';
-//import cors from 'cors';
 
 import { studentResolver } from "./resolvers/student/studentResolver";
 import { redis } from './redis';
@@ -14,6 +13,7 @@ import { AuthCheckerFn } from './validators/authChecker';
 import { meResolver } from './resolvers/me/meResolver';
 import { logoutResolver } from './resolvers/logout/logoutResolver';
 import { sessionResolver } from './resolvers/session/onlineSessionResolver';
+import { staffResolver } from './resolvers/staff/staffResolver';
 
 (async () => {
   const app = express();
@@ -25,7 +25,7 @@ import { sessionResolver } from './resolvers/session/onlineSessionResolver';
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [studentResolver, loginResolver, meResolver, logoutResolver, sessionResolver],
+      resolvers: [studentResolver, loginResolver, meResolver, logoutResolver, sessionResolver, staffResolver],
       validate: true,
       authChecker: AuthCheckerFn
     }),
@@ -51,8 +51,6 @@ import { sessionResolver } from './resolvers/session/onlineSessionResolver';
       }
     })
   );
-
-  //app.use(cors({origin: 'http://localhost:3000',credentials: true}));
 
   apolloServer.applyMiddleware({ app,cors: {origin: ['http://localhost:3000', 'http://192.168.1.8:3000'],credentials: true} });
   const port = process.env.PORT || 4000;

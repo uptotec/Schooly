@@ -7,12 +7,13 @@ import { DashboardFooter } from '../footer/Footer';
 import { StudentDashboardRouter } from '../../../../routes/studentDashboardRoutes';
 
 import styles from './studentDashboard.module.css';
+import { LoadingSpinner } from '../../../shared/loadingSpinner';
 
 const { Content } = Layout;
 
 export const StudentDashboard = ({ loading }: StudentControllerData) => {
   if (loading) {
-    return null;
+    return <LoadingSpinner />;
   }
 
   return (

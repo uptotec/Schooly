@@ -73,8 +73,6 @@ export class loginResolver {
 
   }
 
-
-
   @Query(() => Staff, {nullable: true})
   async staffLogin(
     @Arg("credentials", () => loginType) {email, password}: loginType,
@@ -92,7 +90,7 @@ export class loginResolver {
     return undefined;
 
     ctx.req.session.userType = userTypes.staff;
-    ctx.req.session.studentId = staff.staffId;
+    ctx.req.session.staffId = staff.staffId;
     ctx.req.session.name = staff.name;
     ctx.req.session.email = staff.email;
     ctx.req.session.facilityId = staff.facility.facilityId;
