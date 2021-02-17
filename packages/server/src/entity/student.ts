@@ -6,6 +6,7 @@ import { Field, Int, ObjectType } from "type-graphql";
 import { Timetable } from './timetables';
 import { Enrollment } from "./enrollments";
 import { Grade } from './grade';
+import { Attendance } from './attendance';
 
 @ObjectType()
 @Entity()
@@ -48,6 +49,10 @@ export class Student extends BaseEntity {
   @Field(() => [Grade])
   @OneToMany(() => Grade, grade => grade.student)
   grades: Grade[];
+
+  @Field(() => [Attendance])
+  @OneToMany(() => Attendance, attendance => attendance.student)
+  attendance: Attendance[];
 
   @Field(() => [Timetable])
   timetable: Timetable[];
