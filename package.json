@@ -5,6 +5,8 @@
   ],
   "scripts": {
     "server": "cd packages/server && yarn start",
-    "web": "cd packages/web && yarn start"
+    "web": "cd packages/web && yarn start",
+    "build": "tsc",
+    "codegen": "graphql-codegen --config codegen.yml"
   }
 }

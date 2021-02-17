@@ -10,6 +10,8 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  /** The javascript `Date` as string. Type represents date and time as the ISO Date string. */
+  DateTime: any;
 };
 
 export type Query = {
@@ -19,6 +21,7 @@ export type Query = {
   staffLogin?: Maybe<Staff>;
   me?: Maybe<Me>;
   sessionJWT: Scalars['String'];
+  meStaff?: Maybe<Staff>;
 };
 
 
@@ -41,6 +44,7 @@ export type Student = {
   class: Class;
   group: Group;
   grades: Array<Grade>;
+  attendance: Array<Attendance>;
   timetable: Array<Timetable>;
   courses: Array<Enrollment>;
 };
@@ -160,6 +164,15 @@ export type GradeSystem = {
   name: Scalars['String'];
   gradeLetters: Array<GradeLetter>;
 };
+
+export type Attendance = {
+  __typename?: 'Attendance';
+  attendanceId: Scalars['Int'];
+  date: Scalars['DateTime'];
+  attended: Scalars['Boolean'];
+  student: Student;
+};
+
 
 export type LoginType = {
   email: Scalars['String'];

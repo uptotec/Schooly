@@ -1,8 +1,10 @@
 import { Redirect } from 'react-router-dom';
 import { LogoutControllerData, useUserStore } from '@schooly/controller';
 import { useIdleTimer } from 'react-idle-timer';
-import { StaffDashboard } from './staffDashboard/staffDashboard';
-import { StudentDashboardConnector } from '../dashboardConnector';
+import {
+  StudentDashboardConnector,
+  StaffDashboardConnector,
+} from '../dashboardConnector';
 
 export const Dashboard = ({
   loading,
@@ -29,6 +31,6 @@ export const Dashboard = ({
   } else if (userType === 'student') {
     return <StudentDashboardConnector />;
   } else {
-    return <StaffDashboard />;
+    return <StaffDashboardConnector />;
   }
 };

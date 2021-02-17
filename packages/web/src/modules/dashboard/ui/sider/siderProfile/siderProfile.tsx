@@ -1,6 +1,10 @@
 import * as React from 'react';
 import { Avatar, Typography, Space } from 'antd';
-import { useStudentStore, useUserStore } from '@schooly/controller';
+import {
+  useStaffStore,
+  useStudentStore,
+  useUserStore,
+} from '@schooly/controller';
 
 import styles from './siderProfile.module.css';
 
@@ -24,8 +28,19 @@ const Description = () => {
   const group = useStudentStore((state) => state.meStudent?.group.name);
   const facility = useStudentStore((state) => state.meStudent?.facility.name);
 
+  const staffFacility = useStaffStore((state) => state.meStaff?.facility.name);
+
   if (userType === 'staff') {
-    return null;
+    return (
+      <>
+        <Title level={5} className={styles.Name}>
+          {getFirstAndLastName(name!)}
+        </Title>
+        <Text className={styles.Description}>
+          {`Facility of ${staffFacility}` || null}
+        </Text>
+      </>
+    );
   }
 
   return (
