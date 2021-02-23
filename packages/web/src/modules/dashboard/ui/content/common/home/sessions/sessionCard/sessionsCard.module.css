@@ -36,6 +36,13 @@
   color: #7c7c7c;
 }
 
+/* .Title {
+  max-width: 40%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+} */
+
 @media (max-width: 992px) {
   .Title {
     font-size: 14px !important;
@@ -47,5 +54,11 @@
 
   .LocationIcon {
     display: none;
+  }
+}
+
+@media (min-width: 325px) {
+  .SessionCardCircle {
+    margin: 20px 0px 20px 20px;
   }
 }

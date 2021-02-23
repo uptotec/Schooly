@@ -16,7 +16,7 @@ export const StaffHome = () => {
       <Row>
         <DashboardTitle />
       </Row>
-      <Row>
+      <Row className={styles.SessionsRow}>
         <Col flex={1} className={`ShadowBox ${styles.SessionsColum}`}>
           <SessionsColum />
         </Col>

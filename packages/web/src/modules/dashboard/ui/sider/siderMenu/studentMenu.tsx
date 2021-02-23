@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Menu } from 'antd';
 import { HomeFilled, CalendarFilled, MailFilled } from '@ant-design/icons';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
+import { openInNewTab } from '../../content/common/home/sessions/utils';
 // import { FaBook, FaCheckSquare, FaClipboardCheck } from 'react-icons/fa';
 // import { openInNewTab } from '../../content/common/home/sessions/utils';
 
@@ -51,6 +52,13 @@ const X = ({ history, location }: RouteComponentProps) => {
       >
         Mail
       </Menu.Item> */}
+      <Menu.Item
+        key="moodle"
+        icon={<MailFilled style={{ fontSize: 18 }} />}
+        onClick={() => openInNewTab('http://localhost:8080/moodle/')}
+      >
+        Moodle
+      </Menu.Item>
     </Menu>
   );
 };

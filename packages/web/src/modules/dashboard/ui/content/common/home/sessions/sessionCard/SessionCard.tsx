@@ -36,7 +36,7 @@ export const SessionCard = ({
                 </Title>
               </div>
             </Col>
-            <Col>
+            <Col className={styles.TextContainer}>
               <Title level={5} style={{ margin: 0 }} className={styles.Title}>
                 {`${course.name} ${type}`}
               </Title>
@@ -44,7 +44,7 @@ export const SessionCard = ({
                 style={{ color: '#7C7C7C', fontSize: 14, display: 'block' }}
               >
                 {userType === userTypes.staff
-                  ? `${group.class.department || group.class.facility} Group ${
+                  ? `${group.class.department || group.class.facility} | ${
                       group.name
                     }`
                   : null}

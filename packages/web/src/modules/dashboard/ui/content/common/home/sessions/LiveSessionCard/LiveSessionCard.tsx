@@ -50,7 +50,7 @@ export const LiveSessionCard = ({
                 style={{ color: '#7C7C7C', fontSize: 14, display: 'block' }}
               >
                 {userType === userTypes.staff
-                  ? `${group.class.department || group.class.facility} Group ${
+                  ? `${group.class.department || group.class.facility} | ${
                       group.name
                     }`
                   : null}

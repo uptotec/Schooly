@@ -14,6 +14,6 @@ export const LoadingSpinner = ({ message }: props) => (
       alignItems: 'center',
     }}
   >
-    <Spin tip={message} size="large" />
+    <Spin tip={message || 'Loading...'} size="large" />
   </div>
 );

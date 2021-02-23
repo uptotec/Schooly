@@ -25,7 +25,7 @@ export const DashboardTitle = () => {
     <div className={styles.Container}>
       <Title level={2} className={styles.Title}>
         {`${greeting}, ${
-          userType === userTypes.staff ? 'Dr. ' : null
+          userType === userTypes.staff ? 'Dr. ' : ''
         }${getFirstName(name!)}`}
       </Title>
       {/* <Text className={styles.SubTitle}>
