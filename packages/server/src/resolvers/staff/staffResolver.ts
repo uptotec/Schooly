@@ -1,4 +1,5 @@
 import {  Authorized, Ctx, Query, Resolver } from "type-graphql";
+import lodash from 'lodash';
 
 import { ContextType } from '../../types/contextType';
 import { userTypes } from '@schooly/common';
@@ -30,11 +31,13 @@ export class staffResolver {
 
   @Authorized(userTypes.staff)
   @Query(() => Staff, {nullable: true})
-  meStaff(
+  async meStaff(
     @Ctx() ctx:ContextType
   ){
     const staffId = ctx.req.session.staffId;
 
-    return Staff.findOne({where: {staffId}, relations:['facility', 'timetable', 'timetable.group', 'timetable.group.class', 'timetable.group.class.facility', 'timetable.course']});
+    const staff = await  Staff.findOne({where: {staffId}, relations:['facility', 'timetable', 'timetable.group', 'timetable.group.class', 'timetable.group.class.facility', 'timetable.course']});
+    const sortedTimetable = lodash.orderBy(staff?.timetable, ['day', 'start_time'], ['asc', 'asc']);
+    return {...staff, timetable: sortedTimetable};
   }
 }

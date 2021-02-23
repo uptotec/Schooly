@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { Button, Col, Progress, Row, Typography } from 'antd';
-import { Timetable } from '@schooly/controller';
+import { Timetable, useUserStore } from '@schooly/controller';
 
 import { formatAMPM, openInNewTab } from '../utils';
 
 import styles from './LiveSessionCard.module.css';
 import { FaRegBuilding } from 'react-icons/fa';
 import { CgMediaLive } from 'react-icons/cg';
+import { userTypes } from '@schooly/common';
 
 const { Title, Text } = Typography;
 
@@ -19,9 +20,12 @@ export const LiveSessionCard = ({
   startDate,
   nowDate,
   online,
+  group,
 }: Timetable & { startDate: Date; nowDate: Date }) => {
   const diffMs = nowDate.getTime() - startDate.getTime();
   const diffMins = Math.round(diffMs / 1000 / 60);
+
+  const userType = useUserStore((state) => state.userType);
 
   return (
     <div className={`InsetShadowBox ${styles.SessionCard}`}>
@@ -42,6 +46,15 @@ export const LiveSessionCard = ({
               <Title level={5} style={{ margin: 0 }}>
                 {`${course.name} ${type}`}
               </Title>
+              <Text
+                style={{ color: '#7C7C7C', fontSize: 14, display: 'block' }}
+              >
+                {userType === userTypes.staff
+                  ? `${group.class.department || group.class.facility} Group ${
+                      group.name
+                    }`
+                  : null}
+              </Text>
               <Text
                 style={{ color: '#7C7C7C', fontSize: 14 }}
                 className={styles.LiveNow}

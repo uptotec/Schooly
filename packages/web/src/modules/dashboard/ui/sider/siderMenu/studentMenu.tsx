@@ -2,8 +2,8 @@ import * as React from 'react';
 import { Menu } from 'antd';
 import { HomeFilled, CalendarFilled, MailFilled } from '@ant-design/icons';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
-import { FaBook, FaCheckSquare, FaClipboardCheck } from 'react-icons/fa';
-import { openInNewTab } from '../../content/common/home/sessions/utils';
+// import { FaBook, FaCheckSquare, FaClipboardCheck } from 'react-icons/fa';
+// import { openInNewTab } from '../../content/common/home/sessions/utils';
 
 const X = ({ history, location }: RouteComponentProps) => {
   const defaultPath = location.pathname;
@@ -16,13 +16,13 @@ const X = ({ history, location }: RouteComponentProps) => {
       >
         Home
       </Menu.Item>
-      <Menu.Item
+      {/* <Menu.Item
         key="/courses"
         icon={<FaBook size={18} />}
         onClick={() => history.replace('/courses')}
       >
         Courses
-      </Menu.Item>
+      </Menu.Item> */}
       <Menu.Item
         key="/calendar"
         icon={<CalendarFilled style={{ fontSize: 18 }} />}
@@ -30,20 +30,20 @@ const X = ({ history, location }: RouteComponentProps) => {
       >
         Calendar
       </Menu.Item>
-      <Menu.Item
+      {/* <Menu.Item
         key="/tasks"
         icon={<FaClipboardCheck size={18} />}
         onClick={() => history.replace('/tasks')}
       >
         Tasks
-      </Menu.Item>
-      <Menu.Item
+      </Menu.Item> */}
+      {/* <Menu.Item
         key="/grades"
         icon={<FaCheckSquare size={18} />}
         onClick={() => history.replace('/grades')}
       >
         Grades
-      </Menu.Item>
+      </Menu.Item> */}
       {/* <Menu.Item
         key="mail"
         icon={<MailFilled style={{ fontSize: 18 }} />}

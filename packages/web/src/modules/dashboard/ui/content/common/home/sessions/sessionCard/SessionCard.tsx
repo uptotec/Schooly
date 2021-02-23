@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { Col, Row, Typography } from 'antd';
-import { Timetable } from '@schooly/controller';
+import { Timetable, useUserStore } from '@schooly/controller';
 import { FaRegBuilding } from 'react-icons/fa';
 import { CgMediaLive } from 'react-icons/cg';
 
 import { formatAMPM } from '../utils';
 
 import styles from './sessionsCard.module.css';
+import { userTypes } from '@schooly/common';
 
 const { Title, Text } = Typography;
 
@@ -16,7 +17,10 @@ export const SessionCard = ({
   duration_mins,
   start_time,
   online,
+  group,
 }: Timetable) => {
+  const userType = useUserStore((state) => state.userType);
+
   return (
     <div className={`InsetShadowBox ${styles.SessionCard}`}>
       <Row align="middle" justify="space-between">
@@ -36,6 +40,15 @@ export const SessionCard = ({
               <Title level={5} style={{ margin: 0 }} className={styles.Title}>
                 {`${course.name} ${type}`}
               </Title>
+              <Text
+                style={{ color: '#7C7C7C', fontSize: 14, display: 'block' }}
+              >
+                {userType === userTypes.staff
+                  ? `${group.class.department || group.class.facility} Group ${
+                      group.name
+                    }`
+                  : null}
+              </Text>
               <Text style={{ color: '#7C7C7C', fontSize: 14 }}>
                 Starts at {formatAMPM(start_time)}
               </Text>

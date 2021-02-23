@@ -11,7 +11,7 @@ import { SettingsSiderMenu } from './siderMenu/settingsMenu';
 const { Sider } = Layout;
 
 export const SiderComponent = () => {
-  const [collapsed, setCollapsed] = React.useState(true);
+  const [collapsed, setCollapsed] = React.useState(false);
   return (
     <Sider
       collapsible
@@ -20,8 +20,8 @@ export const SiderComponent = () => {
       width={230}
       theme="light"
       className={styles.Sider}
-      onMouseEnter={() => setCollapsed(false)}
-      onMouseLeave={() => setCollapsed(true)}
+      // onMouseEnter={() => setCollapsed(false)}
+      // onMouseLeave={() => setCollapsed(true)}
     >
       <Logos collapsed={collapsed} />
 

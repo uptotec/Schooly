@@ -1,19 +1,36 @@
 import * as React from 'react';
 import { Empty, Row, Typography } from 'antd';
-import { useStudentStore } from '@schooly/controller';
+import {
+  useStaffStore,
+  useStudentStore,
+  useUserStore,
+} from '@schooly/controller';
 
 import { getSelectedTimetable } from '../utils';
 import noSessions from '../../../../../../../../assets/noSessions.svg';
 import { SessionsList } from '../sessionsList/sessionsList';
 
 import styles from './sessionsColum.module.css';
+import { userTypes } from '@schooly/common';
 
 const { Title } = Typography;
 
 export const SessionsColum = () => {
   const [nowDate, setNowDate] = React.useState(new Date());
 
-  const timeTable = useStudentStore((state) => state.meStudent?.timetable);
+  const userType = useUserStore((state) => state.userType);
+  const StudentTimeTable = useStudentStore(
+    (state) => state.meStudent?.timetable
+  );
+  const StaffTimeTable = useStaffStore((state) => state.meStaff?.timetable);
+
+  let timeTable;
+
+  if (userType === userTypes.staff) {
+    timeTable = StaffTimeTable;
+  } else {
+    timeTable = StudentTimeTable;
+  }
 
   const {
     day,

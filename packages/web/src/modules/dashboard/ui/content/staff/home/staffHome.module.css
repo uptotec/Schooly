@@ -1,0 +1,28 @@
+.SessionsColum {
+  padding: 20px 10px;
+  border-radius: 10px;
+  max-width: 520px;
+}
+
+.Logo {
+  width: auto;
+  height: 55px;
+  margin: 15px auto;
+}
+
+.ShowLogo {
+  display: none;
+}
+
+@media (max-width: 992px) {
+  .ShowLogo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .Logo {
+    width: auto;
+    height: 45px;
+    margin-bottom: 25px;
+  }
+}

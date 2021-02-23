@@ -2,6 +2,7 @@ import { useUserStore } from '@schooly/controller';
 import { Typography } from 'antd';
 
 import styles from './title.module.css';
+import { userTypes } from '@schooly/common';
 
 const { Title, Text } = Typography;
 
@@ -11,6 +12,7 @@ const getFirstName = (name: string) => {
 
 export const DashboardTitle = () => {
   const name = useUserStore((state) => state.name);
+  const userType = useUserStore((state) => state.userType);
 
   const nowHours = new Date().getHours();
   const greeting =
@@ -22,7 +24,9 @@ export const DashboardTitle = () => {
   return (
     <div className={styles.Container}>
       <Title level={2} className={styles.Title}>
-        {`${greeting}, ${getFirstName(name!)}`}
+        {`${greeting}, ${
+          userType === userTypes.staff ? 'Dr. ' : null
+        }${getFirstName(name!)}`}
       </Title>
       {/* <Text className={styles.SubTitle}>
         Here is what you have for {nowHours < 17 ? 'today' : 'tomorrow'}
