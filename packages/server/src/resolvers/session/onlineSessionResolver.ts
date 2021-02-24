@@ -18,7 +18,7 @@ const payload = {
 };
 
 @Resolver()
-export class sessionResolver {
+export class onlineSessionResolver {
   @Authorized()
   @Query(() => String)
   sessionJWT(@Ctx() ctx: ContextType) {
@@ -30,7 +30,6 @@ export class sessionResolver {
     jwtPayload.context.user.email = session.email;
 
     if(session.userType === 'staff'){
-      console.log('herre')
       jwtPayload.moderator = true
     }
 

@@ -3,8 +3,10 @@ import { Course } from './course';
 import { Group } from './group';
 import { Staff } from './staff';
 import { Field, Int, ObjectType } from 'type-graphql';
+import { Class } from './class';
 
 export type  Timetable_type = 'lecture' | 'tutorial' | 'lab';
+export type  Group_type = 'class' | 'Group';
 export type  Timetable_days_type = 'sat' | 'sun' | 'mon' | 'tue' | 'wed' | 'thu' | 'fri';
 
 @ObjectType()
@@ -18,6 +20,10 @@ export class Timetable extends BaseEntity {
   @Field()
   @Column({type: "enum", enum: ['lecture' , 'tutorial' , 'lab']})
   type: Timetable_type;
+
+  @Field()
+  @Column({type: "enum", enum: ['class' , 'group']})
+  groupType: Group_type;
 
   @Field()
   @Column()
@@ -47,15 +53,32 @@ export class Timetable extends BaseEntity {
   @Column({nullable: true})
   joinLink: string
 
+  @Column({ type: "int", nullable: true })
+  courseId: number;
+
   @Field(() => Course)
   @ManyToOne(() => Course, course => course.timetable)
   @JoinColumn({name: "courseId"})
   course: Course;
 
-  @Field(() => Group)
-  @ManyToOne(() => Group, group => group.timetable)
+  @Column({ type: "int", nullable: true })
+  groupId: number;
+
+  @Field(() => Group, {nullable: true})
+  @ManyToOne(() => Group, group => group.timetable, {nullable: true})
   @JoinColumn({name: "groupId"})
   group: Group;
+
+  @Column({ type: "int", nullable: true })
+  classId: number;
+
+  @Field(() => Class, {nullable: true})
+  @ManyToOne(() => Class, classVar => classVar.timetable, {nullable: true})
+  @JoinColumn({name: "classId"})
+  class: Class;
+
+  @Column({ type: "int", nullable: true })
+  instructorId: number;
 
   @Field(() => Staff)
   @ManyToOne(() => Staff, staff => staff.timetable)
