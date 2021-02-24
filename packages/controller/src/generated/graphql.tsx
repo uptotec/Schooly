@@ -68,6 +68,8 @@ export type Class = {
   facility: Facility;
   students: Array<Student>;
   groups: Array<Group>;
+  timetable: Array<Timetable>;
+  enrollments: Array<Enrollment>;
 };
 
 export type Group = {
@@ -84,8 +86,10 @@ export type Group = {
 export type Enrollment = {
   __typename?: 'Enrollment';
   enrollmentId: Scalars['Int'];
+  enrollmentType: Scalars['String'];
   course: Course;
   group: Group;
+  class: Class;
   teacher: Staff;
   teacherAssistant: Staff;
   exams: Array<Exam>;
@@ -104,6 +108,7 @@ export type Timetable = {
   __typename?: 'Timetable';
   timetableId: Scalars['Int'];
   type: Scalars['String'];
+  groupType: Scalars['String'];
   online: Scalars['Boolean'];
   recurring: Scalars['Boolean'];
   date?: Maybe<Scalars['String']>;
@@ -112,7 +117,8 @@ export type Timetable = {
   duration_mins: Scalars['Int'];
   joinLink?: Maybe<Scalars['String']>;
   course: Course;
-  group: Group;
+  group?: Maybe<Group>;
+  class?: Maybe<Class>;
   instructor: Staff;
 };
 
@@ -191,4 +197,25 @@ export type Me = {
 export type Mutation = {
   __typename?: 'Mutation';
   logout: Scalars['Boolean'];
+  createSession: Scalars['Boolean'];
+};
+
+
+export type MutationCreateSessionArgs = {
+  session: CreateSessionInput;
+};
+
+export type CreateSessionInput = {
+  type: Scalars['String'];
+  groupType: Scalars['String'];
+  online: Scalars['Boolean'];
+  recurring: Scalars['Boolean'];
+  date?: Maybe<Scalars['String']>;
+  day?: Maybe<Scalars['String']>;
+  start_time: Scalars['String'];
+  duration_mins: Scalars['Int'];
+  joinLink?: Maybe<Scalars['String']>;
+  course: Scalars['Int'];
+  group?: Maybe<Scalars['Int']>;
+  class?: Maybe<Scalars['Int']>;
 };

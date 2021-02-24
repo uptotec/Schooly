@@ -37,6 +37,7 @@ const ME_REQUEST = gql`
       }
       timetable {
         timetableId
+        groupType
         recurring
         online
         date
@@ -58,6 +59,13 @@ const ME_REQUEST = gql`
             facility {
               name
             }
+          }
+        }
+        class {
+          department
+          degree_year
+          facility {
+            name
           }
         }
       }

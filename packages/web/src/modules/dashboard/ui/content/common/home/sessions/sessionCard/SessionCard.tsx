@@ -17,7 +17,9 @@ export const SessionCard = ({
   duration_mins,
   start_time,
   online,
+  groupType,
   group,
+  class: classVar,
 }: Timetable) => {
   const userType = useUserStore((state) => state.userType);
 
@@ -36,16 +38,20 @@ export const SessionCard = ({
                 </Title>
               </div>
             </Col>
-            <Col className={styles.TextContainer}>
+            <Col>
               <Title level={5} style={{ margin: 0 }} className={styles.Title}>
                 {`${course.name} ${type}`}
               </Title>
               <Text
                 style={{ color: '#7C7C7C', fontSize: 14, display: 'block' }}
               >
-                {userType === userTypes.staff
-                  ? `${group.class.department || group.class.facility} | ${
-                      group.name
+                {userType === userTypes.staff && groupType === 'group'
+                  ? `${
+                      group!.class.department || group!.class.facility.name
+                    } | ${group!.name}`
+                  : userType === userTypes.staff && groupType === 'class'
+                  ? `${classVar!.department || classVar!.facility.name} DY ${
+                      classVar?.degree_year
                     }`
                   : null}
               </Text>

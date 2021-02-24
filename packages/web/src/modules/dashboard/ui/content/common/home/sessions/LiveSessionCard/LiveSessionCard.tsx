@@ -20,7 +20,9 @@ export const LiveSessionCard = ({
   startDate,
   nowDate,
   online,
+  groupType,
   group,
+  class: classVar,
 }: Timetable & { startDate: Date; nowDate: Date }) => {
   const diffMs = nowDate.getTime() - startDate.getTime();
   const diffMins = Math.round(diffMs / 1000 / 60);
@@ -49,9 +51,13 @@ export const LiveSessionCard = ({
               <Text
                 style={{ color: '#7C7C7C', fontSize: 14, display: 'block' }}
               >
-                {userType === userTypes.staff
-                  ? `${group.class.department || group.class.facility} | ${
-                      group.name
+                {userType === userTypes.staff && groupType === 'group'
+                  ? `${
+                      group!.class.department || group!.class.facility.name
+                    } | ${group!.name}`
+                  : userType === userTypes.staff && groupType === 'class'
+                  ? `${classVar!.department || classVar!.facility.name} DY ${
+                      classVar?.degree_year
                     }`
                   : null}
               </Text>
