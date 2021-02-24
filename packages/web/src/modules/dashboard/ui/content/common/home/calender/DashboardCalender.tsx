@@ -1,16 +1,29 @@
 import * as React from 'react';
 import { Typography, Col, Row, Calendar, Empty } from 'antd';
-import { useStudentStore } from '@schooly/controller';
+import {
+  useStaffStore,
+  useStudentStore,
+  useUserStore,
+} from '@schooly/controller';
 import moment from 'moment';
-import { SessionsList } from '../../common/home/sessions/sessionsList/sessionsList';
-import noSessions from '../../../../../../assets/noSessions.svg';
+import { SessionsList } from '../sessions/sessionsList/sessionsList';
+import noSessions from '../../../../../../../assets/noSessions.svg';
+import { userTypes } from '@schooly/common';
 
 const { Title } = Typography;
 
-export const StudentCalender = () => {
+export const DashboardCalender = () => {
   const days = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
   const [date, setDate] = React.useState(moment);
-  const Timetable = useStudentStore((state) => state.meStudent?.timetable);
+
+  const userType = useUserStore((state) => state.userType);
+  const studentTimetable = useStudentStore(
+    (state) => state.meStudent?.timetable
+  );
+  const staffTimetable = useStaffStore((state) => state.meStaff?.timetable);
+
+  const Timetable =
+    userType === userTypes.staff ? staffTimetable : studentTimetable;
 
   const selectedTimetable = Timetable?.filter(
     (session) =>
