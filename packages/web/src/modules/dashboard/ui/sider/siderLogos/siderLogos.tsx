@@ -3,8 +3,8 @@ import { Space, Divider } from 'antd';
 
 import logo from '../../../../../assets/logo-colors.svg';
 import logoMini from '../../../../../assets/logo-mini-colors.svg';
-//import logo2 from '../../../../../assets/svu.svg';
-import logo2 from '../../../../../assets/bue-logo-colors.svg';
+import logo2 from '../../../../../assets/svu.svg';
+//import logo2 from '../../../../../assets/bue-logo-colors.svg';
 
 import styles from './siderLogos.module.css';
 
@@ -17,7 +17,8 @@ export const Logos = ({ collapsed }: logosProps) => {
     <Space align="center" direction="vertical" className={styles.Spacer}>
       {!collapsed ? (
         <Space size={5}>
-          <img src={logo} alt="logo" className={styles.Logo} />
+          {/* <img src={logo} alt="logo" className={styles.Logo} /> */}
+          <h1 style={{ fontSize: 24 }}>I-Learn</h1>
           <Divider style={{ borderWidth: 2 }} type="vertical" />
           <img src={logo2} alt="logo" className={styles.Logo} />
         </Space>
