@@ -36,7 +36,31 @@ export class staffResolver {
   ){
     const staffId = ctx.req.session.staffId;
 
-    const staff = await  Staff.findOne({where: {staffId}, relations:['facility', 'timetable', 'timetable.class', 'timetable.class.facility', 'timetable.group', 'timetable.group.class', 'timetable.group.class.facility', 'timetable.course']});
+    const staff = await  Staff.findOne({where: {staffId}, relations:[
+      'facility',
+      'timetable',
+      'timetable.class',
+      'timetable.class.facility',
+      'timetable.group',
+      'timetable.group.class',
+      'timetable.group.class.facility',
+      'timetable.course',
+      'teacherEnrollments',
+      'teacherEnrollments.course',
+      'teacherEnrollments.group',
+      'teacherEnrollments.group.class',
+      'teacherEnrollments.group.class.facility',
+      'teacherEnrollments.class',
+      'teacherEnrollments.class.facility',
+      'teacherAssistantEnrollments',
+      'teacherAssistantEnrollments.course',
+      'teacherAssistantEnrollments.group',
+      'teacherAssistantEnrollments.group.class',
+      'teacherAssistantEnrollments.group.class.facility',
+      'teacherAssistantEnrollments.class',
+      'teacherAssistantEnrollments.class.facility'
+    ]});
+    console.log(staff?.teacherEnrollments)
     const sortedTimetable = lodash.orderBy(staff?.timetable, ['day', 'start_time'], ['asc', 'asc']);
     return {...staff, timetable: sortedTimetable};
   }

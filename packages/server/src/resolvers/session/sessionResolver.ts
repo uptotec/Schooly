@@ -1,5 +1,6 @@
 import {  Arg, Authorized, Ctx, Mutation, Resolver } from 'type-graphql';
 import { userTypes } from '@schooly/common';
+import crypto from 'crypto';
 
 import { ContextType } from '../../types/contextType';
 import { createSessionInput } from './sessionInput';
@@ -48,7 +49,7 @@ export class sessionResolver {
       group,
       class: classId
     } = session;
-    
+
     const newSession = new Timetable();
 
     newSession.type = type;
@@ -59,11 +60,12 @@ export class sessionResolver {
     newSession.day = day;
     newSession.start_time = start_time;
     newSession.duration_mins = duration_mins;
-    newSession.joinLink = joinLink;
+    newSession.joinLink = joinLink || crypto.randomBytes(16).toString("hex");
     newSession.courseId = course;
     newSession.groupId = group;
     newSession.classId = classId;
     newSession.instructorId = staffId;
+
 
     try {
       await newSession.save();

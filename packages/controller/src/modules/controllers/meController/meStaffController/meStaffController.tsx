@@ -69,6 +69,58 @@ const ME_REQUEST = gql`
           }
         }
       }
+      teacherEnrollments {
+        enrollmentType
+        course {
+          name
+          code
+        }
+        group {
+          name
+          class {
+            year
+            department
+            degree_year
+            facility {
+              name
+            }
+          }
+        }
+        class {
+          year
+          department
+          degree_year
+          facility {
+            name
+          }
+        }
+      }
+      teacherAssistantEnrollments {
+        enrollmentType
+        course {
+          name
+          code
+        }
+        group {
+          name
+          class {
+            year
+            department
+            degree_year
+            facility {
+              name
+            }
+          }
+        }
+        class {
+          year
+          department
+          degree_year
+          facility {
+            name
+          }
+        }
+      }
     }
   }
 `;

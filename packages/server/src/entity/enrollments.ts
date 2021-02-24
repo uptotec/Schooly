@@ -24,12 +24,12 @@ export class Enrollment extends BaseEntity {
   @JoinColumn({name: "courseId"})
   course: Course;
 
-  @Field(() => Group)
+  @Field(() => Group, {nullable: true})
   @ManyToOne(() => Group, group => group.enrollments)
   @JoinColumn({name: "groupId"})
   group: Group;
 
-  @Field(() => Class)
+  @Field(() => Class, {nullable: true})
   @ManyToOne(() => Class, classVar => classVar.enrollments)
   @JoinColumn({name: "classId"})
   class: Class;

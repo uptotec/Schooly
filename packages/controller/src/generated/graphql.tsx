@@ -88,8 +88,8 @@ export type Enrollment = {
   enrollmentId: Scalars['Int'];
   enrollmentType: Scalars['String'];
   course: Course;
-  group: Group;
-  class: Class;
+  group?: Maybe<Group>;
+  class?: Maybe<Class>;
   teacher: Staff;
   teacherAssistant: Staff;
   exams: Array<Exam>;
