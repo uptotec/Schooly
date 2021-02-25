@@ -3,7 +3,7 @@ import { Layout } from 'antd';
 import { StudentControllerData } from '@schooly/controller';
 
 import { SiderComponent } from '../sider/sider';
-import { DashboardFooter } from '../footer/Footer';
+// import { DashboardFooter } from '../footer/Footer';
 import { StudentDashboardRouter } from '../../../../routes/studentDashboardRoutes';
 
 import styles from './studentDashboard.module.css';

@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom';
 
 import styles from './loginPage.module.css';
 import { LoginForm } from '../loginForm/loginForm';
-import logo from '../../../../assets/logo-colors.svg';
+// import logo from '../../../../assets/logo-colors.svg';
 
 export const LoginPage = (props: LoginControllerData) => {
   if (props.success) {

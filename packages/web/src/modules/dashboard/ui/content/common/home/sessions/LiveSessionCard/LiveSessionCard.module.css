@@ -54,3 +54,9 @@
     display: none;
   }
 }
+
+@media (max-width: 325px) {
+  .SessionCardCircle {
+    margin: 20px 0px 20px 20px;
+  }
+}

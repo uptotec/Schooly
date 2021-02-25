@@ -11,7 +11,7 @@ import { SettingsSiderMenu } from './siderMenu/settingsMenu';
 const { Sider } = Layout;
 
 export const SiderComponent = () => {
-  const [collapsed, setCollapsed] = React.useState(false);
+  const [collapsed] = React.useState(false);
   return (
     <Sider
       collapsible

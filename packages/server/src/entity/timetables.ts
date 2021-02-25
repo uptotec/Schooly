@@ -49,9 +49,9 @@ export class Timetable extends BaseEntity {
   @Column()
   duration_mins: number;
 
-  @Field({nullable: true})
-  @Column({nullable: true})
-  joinLink: string
+  @Field(() => String, {nullable: true})
+  @Column({type:'varchar', nullable: true})
+  joinLink: string | null;
 
   @Column({ type: "int", nullable: true })
   courseId: number;

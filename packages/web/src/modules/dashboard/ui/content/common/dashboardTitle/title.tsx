@@ -4,7 +4,7 @@ import { Typography } from 'antd';
 import styles from './title.module.css';
 import { userTypes } from '@schooly/common';
 
-const { Title, Text } = Typography;
+const { Title } = Typography;
 
 const getFirstName = (name: string) => {
   return name.split(' ')[0];

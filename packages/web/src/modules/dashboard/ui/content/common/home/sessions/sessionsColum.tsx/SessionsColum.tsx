@@ -42,7 +42,11 @@ export const SessionsColum = () => {
     nowDate,
   });
 
-  setInterval(() => setNowDate(new Date()), 60000);
+  React.useEffect(() => {
+    const interval = setInterval(() => setNowDate(new Date()), 60000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <>

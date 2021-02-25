@@ -50,6 +50,8 @@ export class sessionResolver {
       class: classId
     } = session;
 
+    const generatedUrl = online ? crypto.randomBytes(16).toString("hex") : null;
+
     const newSession = new Timetable();
 
     newSession.type = type;
@@ -60,7 +62,7 @@ export class sessionResolver {
     newSession.day = day;
     newSession.start_time = start_time;
     newSession.duration_mins = duration_mins;
-    newSession.joinLink = joinLink || crypto.randomBytes(16).toString("hex");
+    newSession.joinLink = joinLink || generatedUrl;
     newSession.courseId = course;
     newSession.groupId = group;
     newSession.classId = classId;
