@@ -1,11 +1,11 @@
-import create from 'zustand'
+import create from 'zustand';
 
 type loginStore = {
   userType: string | undefined;
-  setUserType: (type: string) => void;
-}
+  setUserType: (type: string | undefined) => void;
+};
 
-export const useLoginStore = create<loginStore>(set => ({
+export const useLoginStore = create<loginStore>((set) => ({
   userType: undefined,
-  setUserType: (type) => set({userType: type}),
-}))
+  setUserType: (type) => set({ userType: type }),
+}));

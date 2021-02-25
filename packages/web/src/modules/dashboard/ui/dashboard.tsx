@@ -26,7 +26,7 @@ export const Dashboard = ({
     stopOnIdle: true,
   });
 
-  if (!loading && called) {
+  if (called) {
     return <Redirect to="/login" />;
   } else if (userType === 'student') {
     return <StudentDashboardConnector />;
