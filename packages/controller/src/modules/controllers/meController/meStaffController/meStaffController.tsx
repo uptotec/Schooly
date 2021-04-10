@@ -16,8 +16,11 @@ interface Data {
 }
 
 export const StaffController: React.FunctionComponent<props> = (props) => {
-  const { loading, data, error } = useQuery<Data>(ME_REQUEST);
+  const { loading, data, error, refetch } = useQuery<Data>(ME_REQUEST);
   const setStaff = useStaffStore((state) => state.setStaff);
+  const setRefetchStaff = useStaffStore((state) => state.setRefetchStaff);
+
+  setRefetchStaff(refetch);
 
   if (!loading && !error && data && data.meStaff) {
     setStaff(data.meStaff);
@@ -70,6 +73,7 @@ const ME_REQUEST = gql`
         }
       }
       teacherEnrollments {
+        enrollmentId
         enrollmentType
         course {
           name
@@ -96,6 +100,7 @@ const ME_REQUEST = gql`
         }
       }
       teacherAssistantEnrollments {
+        enrollmentId
         enrollmentType
         course {
           name

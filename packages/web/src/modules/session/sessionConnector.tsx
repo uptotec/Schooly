@@ -1,4 +1,4 @@
-import { SessionController } from '@schooly/controller';
+import { OnlineSessionController } from '@schooly/controller';
 import { OnlineSession } from './ui/onlineSession';
 import { RouteComponentProps } from 'react-router-dom';
 
@@ -6,8 +6,8 @@ export const SessionConnector = (
   routerProps: RouteComponentProps<{ id: string }>
 ) => {
   return (
-    <SessionController>
+    <OnlineSessionController>
       {(data) => <OnlineSession {...data} {...routerProps} />}
-    </SessionController>
+    </OnlineSessionController>
   );
 };

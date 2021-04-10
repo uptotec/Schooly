@@ -1,28 +1,30 @@
-import {  Arg, Authorized, Ctx, Mutation, Resolver } from 'type-graphql';
+import { Arg, Authorized, Ctx, Mutation, Resolver } from 'type-graphql';
 import { userTypes } from '@schooly/common';
 import crypto from 'crypto';
+import isUrl from 'is-url';
 
 import { ContextType } from '../../types/contextType';
 import { createSessionInput } from './sessionInput';
 import { Timetable } from '../../entity/timetables';
+import { Enrollment } from '../../entity/enrollments';
+import { Int } from 'type-graphql';
 
 // due to a bug in @types/express-sessions we need to
 // declare module interface
 // here until bug fix
-declare module "express-session" {
+declare module 'express-session' {
   interface Session {
     studentId: number;
     email: string;
     facilityId: number;
-    classId:number;
+    classId: number;
     groupId: number;
 
-    userType: string,
+    userType: string;
 
     staffId: number;
 
     name: string;
-
   }
 }
 
@@ -32,12 +34,12 @@ export class sessionResolver {
   @Mutation(() => Boolean)
   async createSession(
     @Ctx() ctx: ContextType,
-    @Arg("session",() => createSessionInput) session: createSessionInput
-    ) {
-    const staffId =ctx.req.session.staffId;
+    @Arg('session', () => createSessionInput) session: createSessionInput
+  ) {
+    const staffId = ctx.req.session.staffId;
+
     const {
       type,
-      groupType,
       online,
       recurring,
       date,
@@ -45,37 +47,86 @@ export class sessionResolver {
       start_time,
       duration_mins,
       joinLink,
-      course,
-      group,
-      class: classId
+      enrollmentId,
     } = session;
 
-    const generatedUrl = online ? crypto.randomBytes(16).toString("hex") : null;
+    const enrollment = await Enrollment.findOne(enrollmentId);
+
+    console.log(enrollment);
+
+    if (
+      !enrollment ||
+      (enrollment.teacherId !== staffId &&
+        enrollment.teacherAssistantId !== staffId)
+    ) {
+      return false;
+    }
+
+    let selectedDate = null,
+      selectedDay = null,
+      selectedJoinLink = null;
+
+    if (recurring) {
+      if (!day) {
+        return false;
+      }
+      selectedDay = day;
+    } else {
+      if (!date) {
+        return false;
+      }
+      selectedDate = date;
+    }
+
+    if (joinLink) {
+      selectedJoinLink = isUrl(joinLink) ? joinLink : `http://${joinLink}`;
+    }
+
+    const generatedUrl = online ? crypto.randomBytes(16).toString('hex') : null;
 
     const newSession = new Timetable();
 
     newSession.type = type;
-    newSession.groupType = groupType;
+    newSession.groupType = enrollment.enrollmentType;
     newSession.online = online;
     newSession.recurring = recurring;
-    newSession.date = date;
-    newSession.day = day;
+    newSession.date = selectedDate;
+    newSession.day = selectedDay;
     newSession.start_time = start_time;
     newSession.duration_mins = duration_mins;
-    newSession.joinLink = joinLink || generatedUrl;
-    newSession.courseId = course;
-    newSession.groupId = group;
-    newSession.classId = classId;
+    newSession.joinLink = selectedJoinLink || generatedUrl;
+    newSession.courseId = enrollment.courseId;
+    newSession.groupId = enrollment.groupId;
+    newSession.classId = enrollment.classId;
     newSession.instructorId = staffId;
-
 
     try {
       await newSession.save();
       return true;
-    }catch(err){
+    } catch (err) {
       console.log(err);
       return false;
     }
+  }
 
+  @Authorized(userTypes.staff)
+  @Mutation(() => Boolean)
+  async deleteSession(
+    @Ctx() ctx: ContextType,
+    @Arg('sessionId', () => Int) timetableId: number
+  ) {
+    const timetable = await Timetable.findOne(timetableId);
+
+    if (timetable?.instructorId !== ctx.req.session.staffId) {
+      return false;
+    }
+
+    try {
+      await Timetable.delete(timetableId);
+      return true;
+    } catch (err) {
+      console.log(err);
+      return false;
+    }
   }
 }

@@ -1,21 +1,23 @@
 import * as React from 'react';
 import { ApolloError, gql, useQuery } from '@apollo/client';
 
-export interface SessionControllerData {
+export interface OnlineSessionControllerData {
   data: Data | undefined;
   loading: boolean;
   error: ApolloError | undefined;
 }
 
 interface props {
-  children: (data: SessionControllerData) => JSX.Element | null;
+  children: (data: OnlineSessionControllerData) => JSX.Element | null;
 }
 
 interface Data {
   sessionJWT: string;
 }
 
-export const SessionController: React.FunctionComponent<props> = (props) => {
+export const OnlineSessionController: React.FunctionComponent<props> = (
+  props
+) => {
   const { loading, data, error } = useQuery<Data>(SESSION_REQUEST);
 
   return props.children({ data, loading, error });

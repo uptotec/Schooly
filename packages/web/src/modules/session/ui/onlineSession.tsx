@@ -1,4 +1,4 @@
-import { SessionControllerData, useUserStore } from '@schooly/controller';
+import { OnlineSessionControllerData, useUserStore } from '@schooly/controller';
 import * as React from 'react';
 import Jitsi from 'react-jitsi';
 import { RouteComponentProps } from 'react-router-dom';
@@ -8,7 +8,7 @@ export const OnlineSession = ({
   match,
   data,
   loading,
-}: RouteComponentProps<{ id: string }> & SessionControllerData) => {
+}: RouteComponentProps<{ id: string }> & OnlineSessionControllerData) => {
   const { id } = match.params;
   const userName = useUserStore((state) => state.name);
 

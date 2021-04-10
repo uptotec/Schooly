@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Col, Row, Typography } from 'antd';
+import { Col, Row, Typography, Button } from 'antd';
 import { Timetable, useUserStore } from '@schooly/controller';
 import { FaRegBuilding } from 'react-icons/fa';
 import { CgMediaLive } from 'react-icons/cg';
@@ -94,6 +94,24 @@ export const SessionCard = ({
           )}
         </Col>
       </Row>
+      {/* {userType === userTypes.staff ? (
+        <Row justify="center" align="middle">
+          <Button
+            className="ShadowBox"
+            danger
+            style={{
+              borderRadius: 10,
+              background: '#EE5A5A',
+              height: 35,
+              width: '100%',
+            }}
+          >
+            <Title level={5} style={{ margin: 0, color: 'white' }}>
+              Delete Session
+            </Title>
+          </Button>
+        </Row>
+      ) : null} */}
     </div>
   );
 };

@@ -1,4 +1,5 @@
-import { Timetable } from "@schooly/controller";
+import { Timetable } from '@schooly/controller';
+import isUrl from 'is-url';
 
 export const formatAMPM = (time: string, shift?: number) => {
   let shiftMins = 0;
@@ -25,7 +26,7 @@ export const formatAMPM = (time: string, shift?: number) => {
   const hours = shiftedHours > 12 ? shiftedHours - 12 : shiftedHours;
   const ampm = shiftedHours >= 12 ? 'PM' : 'AM';
   return `${hours}:${shiftedMins || '00'} ${ampm}`;
-}
+};
 
 export const startEndDates = (startTime: string, durationMins: number) => {
   const timeArr = startTime.split(':');
@@ -60,39 +61,51 @@ export const startEndDates = (startTime: string, durationMins: number) => {
 };
 
 export const openInNewTab = (url: string) => {
-  if(!url.startsWith('http')){
-    url = `session/${url}`
+  if (!isUrl(url)) {
+    url = `session/${url}`;
   }
   const newWindow = window.open(url, '_blank', 'noopener,noreferrer');
   if (newWindow) newWindow.opener = null;
 };
 
-export const getSelectedTimetable = ({timeTable, nowDate}: {timeTable: Timetable[] | undefined, nowDate: Date}) => {
+export const getSelectedTimetable = ({
+  timeTable,
+  nowDate,
+}: {
+  timeTable: Timetable[] | undefined;
+  nowDate: Date;
+}) => {
   const days = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
   const nowDay = new Date().getDay();
 
   let selectedTimetable = timeTable?.filter(
-    (session) => (session.recurring && days[nowDay] === session.day) || (!session.recurring && nowDate.toDateString() === new Date(session.date!).toDateString())
+    (session) =>
+      (session.recurring && days[nowDay] === session.day) ||
+      (!session.recurring &&
+        nowDate.toDateString() === new Date(session.date!).toDateString())
   );
 
-  console.log(selectedTimetable)
+  console.log(selectedTimetable);
 
   let day = 'today';
 
-  if(selectedTimetable?.length === 0){
-    if(nowDate.getTime() < 17){
-      return({day, isSessions: false});
-    }else{
+  if (selectedTimetable?.length === 0) {
+    if (nowDate.getTime() < 17) {
+      return { day, isSessions: false };
+    } else {
       const newDate = new Date();
       newDate.setDate(nowDate.getDate() + 1);
       selectedTimetable = timeTable?.filter(
-        (session) => (session.recurring && days[nowDay + 1] === session.day) || (!session.recurring && newDate.toDateString() === new Date(session.date!).toDateString())
+        (session) =>
+          (session.recurring && days[nowDay + 1] === session.day) ||
+          (!session.recurring &&
+            newDate.toDateString() === new Date(session.date!).toDateString())
       );
-  
+
       day = 'tomorrow';
 
-      if(selectedTimetable?.length === 0){
-        return({day, isSessions: false});
+      if (selectedTimetable?.length === 0) {
+        return { day, isSessions: false };
       }
     }
   }
@@ -108,13 +121,16 @@ export const getSelectedTimetable = ({timeTable, nowDate}: {timeTable: Timetable
     const newDate = new Date();
     newDate.setDate(nowDate.getDate() + 1);
     selectedTimetable = timeTable?.filter(
-      (session) => (session.recurring && days[nowDay + 1] === session.day) || (!session.recurring && newDate.toDateString() === new Date(session.date!).toDateString())
-      );
-      day = 'tomorrow';
-      if(selectedTimetable?.length === 0){
-        return({day, isSessions: false});
-      }
+      (session) =>
+        (session.recurring && days[nowDay + 1] === session.day) ||
+        (!session.recurring &&
+          newDate.toDateString() === new Date(session.date!).toDateString())
+    );
+    day = 'tomorrow';
+    if (selectedTimetable?.length === 0) {
+      return { day, isSessions: false };
+    }
   }
 
-  return({day, selectedTimetable, lastSession, isSessions: true});
+  return { day, selectedTimetable, lastSession, isSessions: true };
 };

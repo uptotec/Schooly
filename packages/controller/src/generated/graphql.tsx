@@ -207,7 +207,6 @@ export type MutationCreateSessionArgs = {
 
 export type CreateSessionInput = {
   type: Scalars['String'];
-  groupType: Scalars['String'];
   online: Scalars['Boolean'];
   recurring: Scalars['Boolean'];
   date?: Maybe<Scalars['String']>;
@@ -215,7 +214,5 @@ export type CreateSessionInput = {
   start_time: Scalars['String'];
   duration_mins: Scalars['Int'];
   joinLink?: Maybe<Scalars['String']>;
-  course: Scalars['Int'];
-  group?: Maybe<Scalars['Int']>;
-  class?: Maybe<Scalars['Int']>;
+  enrollmentId: Scalars['Int'];
 };
