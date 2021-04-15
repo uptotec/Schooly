@@ -50,15 +50,23 @@ export class sessionResolver {
       enrollmentId,
     } = session;
 
-    const enrollment = await Enrollment.findOne(enrollmentId);
+    const enrollment = await Enrollment.findOne(enrollmentId, {
+      relations: ['teachers'],
+    });
 
-    console.log(enrollment);
+    if (!enrollment) {
+      return false;
+    }
 
-    if (
-      !enrollment ||
-      (enrollment.teacherId !== staffId &&
-        enrollment.teacherAssistantId !== staffId)
-    ) {
+    let flag = false;
+
+    for (let teacherEnrollment of enrollment?.teachers!) {
+      if (teacherEnrollment.teacherId === staffId) {
+        flag = true;
+      }
+    }
+
+    if (!flag) {
       return false;
     }
 

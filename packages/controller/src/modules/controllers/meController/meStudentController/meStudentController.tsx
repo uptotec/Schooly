@@ -73,18 +73,6 @@ const ME_REQUEST = gql`
           name
           code
         }
-        teacher {
-          name
-          email
-          id
-          staffId
-        }
-        teacherAssistant {
-          name
-          email
-          id
-          staffId
-        }
       }
     }
   }

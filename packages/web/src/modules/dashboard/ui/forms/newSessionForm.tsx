@@ -18,13 +18,9 @@ import {
 export const NewSessionFormFields: React.FunctionComponent<
   FormikProps<newSessionControllerValues> & newSessionControllerData
 > = (props) => {
-  const teacherEnrollments = useStaffStore(
+  const enrollments = useStaffStore(
     (state) => state.meStaff?.teacherEnrollments
   );
-  const teacherAssistantEnrollments = useStaffStore(
-    (state) => state.meStaff?.teacherAssistantEnrollments
-  );
-  const enrollments = [...teacherEnrollments!, ...teacherAssistantEnrollments!];
 
   const [conference, setConference] = React.useState(false);
 
@@ -41,21 +37,21 @@ export const NewSessionFormFields: React.FunctionComponent<
             style={{ width: 400 }}
             placeholder="course"
           >
-            {enrollments.map((enrollment) => (
+            {enrollments!.map(({ enrollment }) => (
               <Select.Option
-                value={`${enrollment.enrollmentId}`}
-                key={enrollment.enrollmentId}
+                value={`${enrollment!.enrollmentId}`}
+                key={enrollment!.enrollmentId}
               >
-                {`${enrollment.course.name} (${
-                  enrollment.enrollmentType === 'class'
+                {`${enrollment!.course.name} (${
+                  enrollment!.enrollmentType === 'class'
                     ? `class ${
-                        enrollment.class?.department ||
-                        enrollment.class?.facility.name
+                        enrollment!.class?.department ||
+                        enrollment!.class?.facility.name
                       }`
                     : `${
-                        enrollment.group?.class.department ||
-                        enrollment.group?.class.facility.name
-                      } group ${enrollment.group?.name}`
+                        enrollment!.group?.class.department ||
+                        enrollment!.group?.class.facility.name
+                      } group ${enrollment!.group?.name}`
                 })`}
               </Select.Option>
             ))}

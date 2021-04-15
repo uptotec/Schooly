@@ -9,10 +9,11 @@ import {
 } from 'typeorm';
 import { Course } from './course';
 import { Group } from './group';
-import { Staff } from './staff';
 import { Exam } from './Exam';
 import { Group_type } from 'src/entity/timetables';
 import { Class } from './class';
+import { OneToMany } from 'typeorm';
+import { TeacherEnrollment } from './teacherEnrollments';
 
 @ObjectType()
 @Entity()
@@ -49,21 +50,12 @@ export class Enrollment extends BaseEntity {
   @JoinColumn({ name: 'classId' })
   class: Class;
 
-  @Column({ type: 'int', nullable: true })
-  teacherId: number;
-
-  @Field(() => Staff)
-  @ManyToOne(() => Staff, (staff) => staff.teacherEnrollments)
-  @JoinColumn({ name: 'teacherId' })
-  teacher: Staff;
-
-  @Column({ type: 'int', nullable: true })
-  teacherAssistantId: number;
-
-  @Field(() => Staff)
-  @ManyToOne(() => Staff, (staff) => staff.teacherAssistantEnrollments)
-  @JoinColumn({ name: 'teacherAssistantId' })
-  teacherAssistant: Staff;
+  @Field(() => [TeacherEnrollment])
+  @OneToMany(
+    () => TeacherEnrollment,
+    (teacherEnrollment) => teacherEnrollment.enrollment
+  )
+  teachers: TeacherEnrollment[];
 
   @Field(() => [Exam])
   exams: Exam[];

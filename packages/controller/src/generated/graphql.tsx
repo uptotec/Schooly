@@ -90,8 +90,7 @@ export type Enrollment = {
   course: Course;
   group?: Maybe<Group>;
   class?: Maybe<Class>;
-  teacher: Staff;
-  teacherAssistant: Staff;
+  teachers: Array<TeacherEnrollment>;
   exams: Array<Exam>;
 };
 
@@ -129,9 +128,16 @@ export type Staff = {
   name: Scalars['String'];
   email: Scalars['String'];
   facility: Facility;
-  teacherEnrollments: Array<Enrollment>;
-  teacherAssistantEnrollments: Array<Enrollment>;
+  teacherEnrollments: Array<TeacherEnrollment>;
   timetable: Array<Timetable>;
+};
+
+export type TeacherEnrollment = {
+  __typename?: 'TeacherEnrollment';
+  teacherEnrollmentId: Scalars['Int'];
+  enrollment?: Maybe<Enrollment>;
+  teacher: Staff;
+  role: Scalars['String'];
 };
 
 export type Exam = {
@@ -198,11 +204,17 @@ export type Mutation = {
   __typename?: 'Mutation';
   logout: Scalars['Boolean'];
   createSession: Scalars['Boolean'];
+  deleteSession: Scalars['Boolean'];
 };
 
 
 export type MutationCreateSessionArgs = {
   session: CreateSessionInput;
+};
+
+
+export type MutationDeleteSessionArgs = {
+  sessionId: Scalars['Int'];
 };
 
 export type CreateSessionInput = {

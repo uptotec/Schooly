@@ -73,14 +73,24 @@ const ME_REQUEST = gql`
         }
       }
       teacherEnrollments {
-        enrollmentId
-        enrollmentType
-        course {
-          name
-          code
-        }
-        group {
-          name
+        enrollment {
+          enrollmentId
+          enrollmentType
+          course {
+            name
+            code
+          }
+          group {
+            name
+            class {
+              year
+              department
+              degree_year
+              facility {
+                name
+              }
+            }
+          }
           class {
             year
             department
@@ -88,41 +98,6 @@ const ME_REQUEST = gql`
             facility {
               name
             }
-          }
-        }
-        class {
-          year
-          department
-          degree_year
-          facility {
-            name
-          }
-        }
-      }
-      teacherAssistantEnrollments {
-        enrollmentId
-        enrollmentType
-        course {
-          name
-          code
-        }
-        group {
-          name
-          class {
-            year
-            department
-            degree_year
-            facility {
-              name
-            }
-          }
-        }
-        class {
-          year
-          department
-          degree_year
-          facility {
-            name
           }
         }
       }

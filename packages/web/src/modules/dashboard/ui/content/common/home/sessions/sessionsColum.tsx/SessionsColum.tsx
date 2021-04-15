@@ -32,6 +32,8 @@ export const SessionsColum = () => {
     timeTable = StudentTimeTable;
   }
 
+  console.log('timetable:', StudentTimeTable);
+
   const {
     day,
     selectedTimetable,
