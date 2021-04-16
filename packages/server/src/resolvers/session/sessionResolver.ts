@@ -8,6 +8,7 @@ import { createSessionInput } from './sessionInput';
 import { Timetable } from '../../entity/timetables';
 import { Enrollment } from '../../entity/enrollments';
 import { Int } from 'type-graphql';
+import { Staff } from '../../entity/staff';
 
 // due to a bug in @types/express-sessions we need to
 // declare module interface
@@ -94,6 +95,8 @@ export class sessionResolver {
 
     const newSession = new Timetable();
 
+    const staff = await Staff.findOne(staffId);
+
     newSession.type = type;
     newSession.groupType = enrollment.enrollmentType;
     newSession.online = online;
@@ -106,7 +109,7 @@ export class sessionResolver {
     newSession.courseId = enrollment.courseId;
     newSession.groupId = enrollment.groupId;
     newSession.classId = enrollment.classId;
-    newSession.instructorsIds = [staffId];
+    newSession.instructors = [staff!];
 
     try {
       await newSession.save();

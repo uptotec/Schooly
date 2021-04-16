@@ -41,9 +41,9 @@ export const NewSessionController: React.FunctionComponent<props> = (props) => {
     addSession({ variables: values });
   };
 
-  if (!loading && data && data.createSession) {
+  React.useEffect(() => {
     refetchStaff();
-  }
+  }, [data]);
 
   console.log(error);
 
