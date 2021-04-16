@@ -4,6 +4,7 @@ import {
   Column,
   Entity,
   JoinColumn,
+  ManyToMany,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -47,6 +48,6 @@ export class Staff extends BaseEntity {
   teacherEnrollments: TeacherEnrollment[];
 
   @Field(() => [Timetable])
-  @OneToMany(() => Timetable, (timetable) => timetable.instructor)
+  @ManyToMany(() => Timetable, (timetable) => timetable.instructors)
   timetable: Timetable[];
 }

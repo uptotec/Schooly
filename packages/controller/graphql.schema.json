@@ -1265,16 +1265,24 @@
             "deprecationReason": null
           },
           {
-            "name": "instructor",
+            "name": "instructors",
             "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "OBJECT",
-                "name": "Staff",
-                "ofType": null
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "Staff",
+                    "ofType": null
+                  }
+                }
               }
             },
             "isDeprecated": false,

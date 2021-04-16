@@ -3,14 +3,17 @@ import {
   Column,
   Entity,
   JoinColumn,
+  ManyToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
+  RelationId,
 } from 'typeorm';
 import { Course } from './course';
 import { Group } from './group';
 import { Staff } from './staff';
 import { Field, Int, ObjectType } from 'type-graphql';
 import { Class } from './class';
+import { JoinTable } from 'typeorm';
 
 export type Timetable_type = 'lecture' | 'tutorial' | 'lab';
 export type Group_type = 'class' | 'Group';
@@ -94,11 +97,15 @@ export class Timetable extends BaseEntity {
   @JoinColumn({ name: 'classId' })
   class: Class;
 
-  @Column({ type: 'int', nullable: true })
-  instructorId: number;
+  @RelationId((timetable: Timetable) => timetable.instructors)
+  instructorsIds: number[];
 
-  @Field(() => Staff)
-  @ManyToOne(() => Staff, (staff) => staff.timetable)
-  @JoinColumn({ name: 'instructorId' })
-  instructor: Staff;
+  @Field(() => [Staff])
+  @ManyToMany(() => Staff, (staff) => staff.timetable)
+  @JoinTable({
+    name: 'staff_timetable',
+    joinColumns: [{ name: 'timetableId' }],
+    inverseJoinColumns: [{ name: 'staffId' }],
+  })
+  instructors: Staff[];
 }

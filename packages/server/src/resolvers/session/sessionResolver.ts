@@ -106,7 +106,7 @@ export class sessionResolver {
     newSession.courseId = enrollment.courseId;
     newSession.groupId = enrollment.groupId;
     newSession.classId = enrollment.classId;
-    newSession.instructorId = staffId;
+    newSession.instructorsIds = [staffId];
 
     try {
       await newSession.save();
@@ -125,7 +125,16 @@ export class sessionResolver {
   ) {
     const timetable = await Timetable.findOne(timetableId);
 
-    if (timetable?.instructorId !== ctx.req.session.staffId) {
+    let flag = false;
+
+    for (let instructor of timetable?.instructors!) {
+      if (instructor.staffId === ctx.req.session.staffId) {
+        flag = true;
+        break;
+      }
+    }
+
+    if (!flag) {
       return false;
     }
 

@@ -50,7 +50,7 @@ export class studentResolver {
   timetable(@Root() student: Student) {
     return Timetable.find({
       where: [{ group: student.group }, { class: student.class }],
-      relations: ['course', 'instructor'],
+      relations: ['course', 'instructors'],
       order: { day: 'ASC', start_time: 'ASC' },
     });
   }

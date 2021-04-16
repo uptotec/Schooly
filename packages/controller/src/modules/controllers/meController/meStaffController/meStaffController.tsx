@@ -73,6 +73,7 @@ const ME_REQUEST = gql`
         }
       }
       teacherEnrollments {
+        role
         enrollment {
           enrollmentId
           enrollmentType

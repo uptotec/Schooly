@@ -62,7 +62,7 @@ const ME_REQUEST = gql`
           name
           courseId
         }
-        instructor {
+        instructors {
           name
           email
           staffId

@@ -118,7 +118,7 @@ export type Timetable = {
   course: Course;
   group?: Maybe<Group>;
   class?: Maybe<Class>;
-  instructor: Staff;
+  instructors: Array<Staff>;
 };
 
 export type Staff = {
