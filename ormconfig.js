@@ -20,16 +20,19 @@ module.exports = [
   {
     name: "production",
     type: "postgres",
-    url: process.env.DATABASE_URL,
+    host: "localhost",
+    username: "postgres",
+    password: "Uptotec2001",
+    database: "schooly",
     synchronize: true, // switch this to false once you have the initial tables created and use migrations instead
     logging: false,
-    entities: ["dist/entity/**/*.js"],
-    migrations: ["dist/migration/**/*.js"],
-    subscribers: ["dist/subscriber/**/*.js"],
+    entities: ["entity/**/*.js"],
+    migrations: ["migration/**/*.js"],
+    subscribers: ["subscriber/**/*.js"],
     cli: {
-      entitiesDir: "dist/entity",
-      migrationsDir: "dist/migration",
-      subscribersDir: "dist/subscriber"
+      entitiesDir: "entity",
+      migrationsDir: "migration",
+      subscribersDir: "subscriber"
     }
   }
 ];
