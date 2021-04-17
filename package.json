@@ -1,9 +1,15 @@
 {
   "name": "Schooly",
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ],
+    "nohoist": [
+      "**/rimraf",
+      "**/rimraf/**"
+    ]
+  },
   "scripts": {
     "server": "cd packages/server && yarn start",
     "web": "cd packages/web && yarn start",
