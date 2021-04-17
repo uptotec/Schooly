@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { Col, Row, Typography } from 'antd';
-import moment from 'moment';
+import { Col, Row } from 'antd';
 
 import { DashboardTitle } from '../../common/dashboardTitle/title';
 import { SessionsColum } from '../../common/home/sessions/sessionsColum.tsx/SessionsColum';

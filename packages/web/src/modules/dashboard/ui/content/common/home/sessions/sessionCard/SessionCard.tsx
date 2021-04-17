@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Col, Row, Typography, Button } from 'antd';
+import { Col, Row, Typography } from 'antd';
 import { Timetable, useUserStore } from '@schooly/controller';
 import { FaRegBuilding } from 'react-icons/fa';
 import { CgMediaLive } from 'react-icons/cg';
