@@ -54,6 +54,8 @@ import { sessionResolver } from './resolvers/session/sessionResolver';
 
   const RedisStore = connectRedis(session);
 
+  app.set('trust proxy', true);
+
   app.use(
     session({
       store: new RedisStore({
@@ -64,6 +66,7 @@ import { sessionResolver } from './resolvers/session/sessionResolver';
         'cajFDTkg-X3QBYJAH&yfs%D9Mc5u-thm_4S5fFRbC?gKuupdy97LMBycGNUvjNVC*=97z5kbvAcfts?ab#_xze_4sQ?#Xaw@XcaWbD3%xL#55Dhfs=#+JUY8MhsHhnr#uvBFPURxHueJvjuNP7$C-x7m*CAGt+pfA+x*3D=RddQdutvYPDs6XDEXqPc!yXa$xSLWA5G9dgnpLmFe_R4kH3tN+pNyfn=ZHeW$W?f-v*qktBvA4^8YY8ksrLqWFBTG&g^74SY#CUJGj!xXZUVk!qUv$Qp_F%ATHKj&yAk4jpeLkP&G$*bc@t#UJa!4n+TqGSbn9L#L&FxXg@BUBd+%c+f3@E2wTM37PmzSbY*DHBfJ8WZLRm8_JGe7QMhRG%Cjx4L?cHw2G&@k6$_Jkh4v9fGD?*G-XnkNQt2?nE9W3=7FHRm%NNEkbd7cZcetGv48SeHcWqTUECfnR9_nSkSLc@yv$cPyd5RN?qfpUt%+8#SM785xAsYLHu&Y4#tf&dFy',
       resave: false,
       saveUninitialized: false,
+      proxy: true,
       cookie: {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
@@ -84,11 +87,13 @@ import { sessionResolver } from './resolvers/session/sessionResolver';
     // },
   });
 
-  app.use(express.static(path.join(__dirname, '../../web/build')));
+  if (environment === 'production' && process.env.SERVE_FRONT === 'true') {
+    app.use(express.static(path.join(__dirname, '../../web/build')));
 
-  app.use('/', (_, res) => {
-    res.sendFile(path.join(__dirname, '../../web/build', 'index.html'));
-  });
+    app.use('/', (_, res) => {
+      res.sendFile(path.join(__dirname, '../../web/build', 'index.html'));
+    });
+  }
 
   app.listen(config.port, () => {
     console.log(`server started at http://localhost:${config.port}/graphql`);
