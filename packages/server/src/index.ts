@@ -5,9 +5,7 @@ import { ApolloServer } from 'apollo-server-express';
 import { buildSchema } from 'type-graphql';
 import session from 'express-session';
 import connectRedis from 'connect-redis';
-import fs from 'fs';
-import https from 'https';
-import http from 'http';
+import path from 'path';
 
 import { studentResolver } from './resolvers/student/studentResolver';
 import { redis } from './redis';
@@ -28,8 +26,8 @@ import { sessionResolver } from './resolvers/session/sessionResolver';
   await createConnection({ ...options, name: 'default' });
 
   const configurations = {
-    production: { ssl: true, port: 4000, hostname: process.env.SITE_DOMAIN },
-    development: { ssl: false, port: 4000, hostname: 'localhost' },
+    production: { ssl: true, port: process.env.PORT || 4000 },
+    development: { ssl: false, port: 4000 },
   };
 
   const environment =
@@ -76,32 +74,24 @@ import { sessionResolver } from './resolvers/session/sessionResolver';
 
   apolloServer.applyMiddleware({
     app,
-    cors: {
-      origin: [
-        'http://localhost:3000',
-        process.env.SITE_URL || 'http://192.168.1.5:3000',
-      ],
-      credentials: true,
-    },
+    // cors: {
+    //   origin: [
+    //     'http://localhost:3000',
+    //     process.env.SITE_URL || 'http://192.168.1.5:3000',
+    //   ],
+    //   credentials: true,
+    // },
   });
 
-  // Create the HTTPS or HTTP server, per configuration
-  let httpServer;
-  if (config.ssl) {
-    // Assumes certificates are in a .ssl folder off of the package root.
-    // Make sure these files are secured.
-    httpServer = https.createServer(
-      {
-        key: fs.readFileSync(`./ssl/${environment}/server.key`),
-        cert: fs.readFileSync(`./ssl/${environment}/server.crt`),
-      },
-      app
-    );
-  } else {
-    httpServer = http.createServer(app);
+  if (environment === 'production') {
+    app.use(express.static(path.join(__dirname, '../../web/build')));
+
+    app.use('/', (_, res) => {
+      res.sendFile(path.join(__dirname, '../../web/build', 'index.html'));
+    });
   }
 
-  httpServer.listen(config.port, () => {
+  app.listen(config.port, () => {
     console.log(`server started at http://localhost:${config.port}/graphql`);
   });
 })();
