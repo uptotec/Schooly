@@ -33,7 +33,7 @@ export const NewSessionFormFields: React.FunctionComponent<
       <form onSubmit={props.handleSubmit} id="createSessionForm">
         <Form.Item label="course">
           <Select
-            onChange={(value) => props.setFieldValue('enrollmentId', +value)}
+            onChange={(value) => props.setFieldValue('enrollmentId', +value!)}
             style={{ width: 400 }}
             placeholder="course"
           >
