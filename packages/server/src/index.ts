@@ -83,7 +83,7 @@ import { sessionResolver } from './resolvers/session/sessionResolver';
     // },
   });
 
-  if (environment === 'production') {
+  if (environment === 'production' && process.env.SERVE_FRONT === 'true') {
     app.use(express.static(path.join(__dirname, '../../web/build')));
 
     app.use('/', (_, res) => {
