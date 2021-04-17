@@ -68,6 +68,7 @@ import { sessionResolver } from './resolvers/session/sessionResolver';
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         maxAge: 1000 * 60 * 60 * 24 * 7 * 52 * 7,
+        domain: process.env.SITE_DOMAIN || 'localhost',
       },
     })
   );
@@ -83,13 +84,11 @@ import { sessionResolver } from './resolvers/session/sessionResolver';
     // },
   });
 
-  if (environment === 'production' && process.env.SERVE_FRONT === 'true') {
-    app.use(express.static(path.join(__dirname, '../../web/build')));
+  app.use(express.static(path.join(__dirname, '../../web/build')));
 
-    app.use('/', (_, res) => {
-      res.sendFile(path.join(__dirname, '../../web/build', 'index.html'));
-    });
-  }
+  app.use('/', (_, res) => {
+    res.sendFile(path.join(__dirname, '../../web/build', 'index.html'));
+  });
 
   app.listen(config.port, () => {
     console.log(`server started at http://localhost:${config.port}/graphql`);
