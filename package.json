@@ -1,4 +1,5 @@
 {
+  "name": "Schooly",
   "private": true,
   "workspaces": [
     "packages/*"
@@ -6,6 +7,11 @@
   "scripts": {
     "server": "cd packages/server && yarn start",
     "web": "cd packages/web && yarn start",
-    "codegen": "graphql-codegen --config codegen.yml"
+    "codegen": "graphql-codegen --config codegen.yml",
+    "build:server": "lerna run build --scope={@schooly/common,@schooly/server}",
+    "build:web": "lerna run build --scope={@schooly/common,@schooly/controller,@schooly/web}"
+  },
+  "devDependencies": {
+    "lerna": "^4.0.0"
   }
 }
