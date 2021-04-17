@@ -5,6 +5,9 @@ import { ApolloServer } from 'apollo-server-express';
 import { buildSchema } from 'type-graphql';
 import session from 'express-session';
 import connectRedis from 'connect-redis';
+import fs from 'fs';
+import https from 'https';
+import http from 'http';
 
 import { studentResolver } from './resolvers/student/studentResolver';
 import { redis } from './redis';
@@ -23,6 +26,15 @@ import { sessionResolver } from './resolvers/session/sessionResolver';
     process.env.NODE_ENV || 'development'
   );
   await createConnection({ ...options, name: 'default' });
+
+  const configurations = {
+    production: { ssl: true, port: 4000, hostname: process.env.SITE_DOMAIN },
+    development: { ssl: false, port: 4000, hostname: 'localhost' },
+  };
+
+  const environment =
+    process.env.NODE_ENV === 'production' ? 'production' : 'development';
+  const config = configurations[environment];
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
@@ -72,8 +84,24 @@ import { sessionResolver } from './resolvers/session/sessionResolver';
       credentials: true,
     },
   });
-  const port = process.env.PORT || 4000;
-  app.listen(port, () => {
-    console.log(`server started at http://localhost:${port}/graphql`);
+
+  // Create the HTTPS or HTTP server, per configuration
+  let httpServer;
+  if (config.ssl) {
+    // Assumes certificates are in a .ssl folder off of the package root.
+    // Make sure these files are secured.
+    httpServer = https.createServer(
+      {
+        key: fs.readFileSync(`./ssl/${environment}/server.key`),
+        cert: fs.readFileSync(`./ssl/${environment}/server.crt`),
+      },
+      app
+    );
+  } else {
+    httpServer = http.createServer(app);
+  }
+
+  httpServer.listen(config.port, () => {
+    console.log(`server started at http://localhost:${config.port}/graphql`);
   });
 })();
