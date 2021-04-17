@@ -55,7 +55,7 @@ const X = ({ history, location }: RouteComponentProps) => {
       <Menu.Item
         key="moodle"
         icon={<MailFilled style={{ fontSize: 18 }} />}
-        onClick={() => openInNewTab('http://localhost:8080/moodle/')}
+        onClick={() => openInNewTab('http://moodle.ilearnsvu.com:8081/')}
       >
         Moodle
       </Menu.Item>
