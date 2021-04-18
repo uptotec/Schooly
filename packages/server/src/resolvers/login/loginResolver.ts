@@ -1,4 +1,4 @@
-import { Arg, Ctx, Query, Resolver } from "type-graphql";
+import { Arg, Ctx, Query, Resolver } from 'type-graphql';
 import bcrypt from 'bcrypt';
 
 import { Student } from '../../entity/student';
@@ -10,20 +10,19 @@ import { userTypes } from '@schooly/common';
 // due to a bug in @types/express-sessions we need to
 // declare module interface
 // here until bug fix
-declare module "express-session" {
+declare module 'express-session' {
   interface Session {
     studentId: number;
     email: string;
     facilityId: number;
-    classId:number;
-    groupId: number
+    classId: number;
+    groupId: number;
 
-    userType: string,
+    userType: string;
 
     staffId: number;
 
     name: string;
-
   }
 }
 
@@ -32,34 +31,34 @@ declare module "express-session" {
  * @method studentLogin manages sign in for student accounts only
  * @param loginType {email, password}
  * @returns student object and session cookie
- * 
+ *
  * @method staffLogin manages sign in for staff accounts only
  * @param loginType {email, password}
  * @returns staff object and session cookie
- * 
+ *
  * TODO try to join both method in one
- * 
+ *
  */
 
 @Resolver()
 export class loginResolver {
-
-  @Query(() => Student, {nullable: true})
+  @Query(() => Student, { nullable: true })
   async studentLogin(
-    @Arg("credentials", () => loginType) {email, password}: loginType,
+    @Arg('credentials', () => loginType) { email, password }: loginType,
     @Ctx() ctx: ContextType
-  ): Promise<Student | undefined>
-  {
+  ): Promise<Student | undefined> {
+    const parsedEmail = email.toLowerCase();
 
-    const student = await Student.findOne({where: {email}, relations:['facility', 'class', 'group']});
+    const student = await Student.findOne({
+      where: { email: parsedEmail },
+      relations: ['facility', 'class', 'group'],
+    });
 
-    if(!student)
-    return undefined;
+    if (!student) return undefined;
 
-    const valid = await  bcrypt.compare(password, student.password);
+    const valid = await bcrypt.compare(password, student.password);
 
-    if(!valid)
-    return undefined;
+    if (!valid) return undefined;
 
     ctx.req.session.userType = userTypes.student;
     ctx.req.session.studentId = student.studentId;
@@ -70,24 +69,25 @@ export class loginResolver {
     ctx.req.session.groupId = student.group.groupId;
 
     return valid ? student : undefined;
-
   }
 
-  @Query(() => Staff, {nullable: true})
+  @Query(() => Staff, { nullable: true })
   async staffLogin(
-    @Arg("credentials", () => loginType) {email, password}: loginType,
+    @Arg('credentials', () => loginType) { email, password }: loginType,
     @Ctx() ctx: ContextType
-  ): Promise<Staff | undefined>
-  {
-    const staff =  await Staff.findOne({where: {email},relations: ["facility"]});
+  ): Promise<Staff | undefined> {
+    const parsedEmail = email.toLowerCase();
 
-    if(!staff)
-    return undefined;
+    const staff = await Staff.findOne({
+      where: { email: parsedEmail },
+      relations: ['facility'],
+    });
 
-    const valid = await  bcrypt.compare(password, staff.password);
+    if (!staff) return undefined;
 
-    if(!valid)
-    return undefined;
+    const valid = await bcrypt.compare(password, staff.password);
+
+    if (!valid) return undefined;
 
     ctx.req.session.userType = userTypes.staff;
     ctx.req.session.staffId = staff.staffId;
@@ -96,7 +96,5 @@ export class loginResolver {
     ctx.req.session.facilityId = staff.facility.facilityId;
 
     return staff;
-
   }
-
 }
