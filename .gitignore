@@ -3,3 +3,4 @@ dist
 .VSCodeCounter
 build
 .eslintcache
+.vscode
