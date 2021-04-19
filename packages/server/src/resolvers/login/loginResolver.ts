@@ -47,10 +47,8 @@ export class loginResolver {
     @Arg('credentials', () => loginType) { email, password }: loginType,
     @Ctx() ctx: ContextType
   ): Promise<Student | undefined> {
-    const parsedEmail = email.toLowerCase();
-
     const student = await Student.findOne({
-      where: { email: parsedEmail },
+      where: { email: email.toLowerCase() },
       relations: ['facility', 'class', 'group'],
     });
 
@@ -76,10 +74,8 @@ export class loginResolver {
     @Arg('credentials', () => loginType) { email, password }: loginType,
     @Ctx() ctx: ContextType
   ): Promise<Staff | undefined> {
-    const parsedEmail = email.toLowerCase();
-
     const staff = await Staff.findOne({
-      where: { email: parsedEmail },
+      where: { email: email.toLowerCase() },
       relations: ['facility'],
     });
 
