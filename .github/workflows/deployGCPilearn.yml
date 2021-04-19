@@ -22,11 +22,12 @@ jobs:
           key: ${{ secrets.GCP_ILEARN }}
           passphrase: ${{ secrets.GCP_PASS }}
           script: |
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
             eval $(ssh-agent -s)
             ssh-add github_key
             cd Schooly/
             git pull origin master
-            npm i -g yarn
             yarn install
             yarn run build:all
             docker stop schooly
