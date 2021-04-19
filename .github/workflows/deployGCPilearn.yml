@@ -26,8 +26,8 @@ jobs:
             ssh-add github_key
             cd Schooly/
             git pull origin master
-            yarn install
-            yarn run build:all
+            npx yarn install
+            npx yarn run build:all
             docker stop schooly
             docker rm schooly
             docker build -t uptotec/schooly:latest .
