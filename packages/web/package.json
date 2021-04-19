@@ -1,12 +1,12 @@
 {
   "name": "@schooly/web",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.3.7",
     "@craco/craco": "^6.0.0",
-    "@schooly/common": "^0.0.6",
-    "@schooly/controller": "^0.0.6",
+    "@schooly/common": "^0.0.7",
+    "@schooly/controller": "^0.0.7",
     "@types/react": "^17.0.3",
     "antd": "^4.11.2",
     "apollo-link-http": "^1.5.17",
