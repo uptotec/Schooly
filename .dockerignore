@@ -1,0 +1,11 @@
+*
+! ./package.json
+! ./packages/common/package.json
+! ./packages/controller/package.json
+! ./packages/web/package.json
+! ./packages/server/package.json
+! ./packages/common/dist
+! ./packages/controller/dist
+! ./packages/web/build
+! ./packages/server/dist
+! ./ormconfig.js
