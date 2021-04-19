@@ -24,11 +24,12 @@ jobs:
           script: |
             eval $(ssh-agent -s)
             ssh-add github_key
-            cd Schooly
+            cd Schooly/
             git pull origin master
+            yarn install
             yarn run build:all
             docker stop schooly
-            docker remove schooly
+            docker rm schooly
             docker build -t uptotec/schooly:latest .
             docker run -p 4000:4000 --net="host" --restart on-failure -d --name schooly uptotec/schooly:latest
 
