@@ -22,6 +22,8 @@ jobs:
           key: ${{ secrets.GCP_ILEARN }}
           passphrase: ${{ secrets.GCP_PASS }}
           script: |
+            eval $(ssh-agent -s)
+            ssh-add github_key
             cd Schooly
             git pull origin master
             yarn run build:all
