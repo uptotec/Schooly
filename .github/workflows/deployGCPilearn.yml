@@ -2,7 +2,7 @@ name: Deploy ilearn to GCP
 
 on:
   release:
-    types: [published]
+    types: [created]
 
 jobs:
 
