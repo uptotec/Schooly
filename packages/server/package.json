@@ -1,6 +1,6 @@
 {
   "name": "@schooly/server",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "devDependencies": {
     "@types/bcrypt": "^3.0.0",
     "@types/connect-redis": "^0.0.16",
@@ -15,7 +15,7 @@
     "typescript": "4.1.3"
   },
   "dependencies": {
-    "@schooly/common": "^0.0.2",
+    "@schooly/common": "^0.0.3",
     "apollo-server-express": "^2.9.9",
     "bcrypt": "^5.0.0",
     "class-validator": "^0.13.1",
