@@ -58,7 +58,9 @@ export class loginResolver {
 
     const valid = await bcrypt.compare(password, student.password);
 
-    if (!valid) return undefined;
+    if (!valid) {
+      return undefined;
+    }
 
     ctx.req.session.userType = userTypes.student;
     ctx.req.session.studentId = student.studentId;
