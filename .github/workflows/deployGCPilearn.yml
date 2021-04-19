@@ -23,7 +23,7 @@ jobs:
           script: |
             cd Schooly
             git pull origin master
-            yarn run build:since
+            yarn run build:all
             docker stop schooly
             docker remove schooly
             docker build -t uptotec/schooly:latest .
