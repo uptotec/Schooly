@@ -13,7 +13,7 @@ jobs:
     name: Deploy ilearn to GCP
     runs-on: ubuntu-latest
     steps:
-      - name: connect to GCP with ssh
+      - name: Run build commands
         uses: appleboy/ssh-action@master 
         with:
           host: 35.232.212.107
