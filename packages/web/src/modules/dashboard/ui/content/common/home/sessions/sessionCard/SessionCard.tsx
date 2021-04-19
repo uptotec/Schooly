@@ -40,7 +40,8 @@ export const SessionCard = ({
             </Col>
             <Col>
               <Title level={5} style={{ margin: 0 }} className={styles.Title}>
-                {`${course.name} ${type}`}
+                {/* {`${course.name} ${type}`} */}
+                {`${course.name}`}
               </Title>
               <Text
                 style={{ color: '#7C7C7C', fontSize: 14, display: 'block' }}
