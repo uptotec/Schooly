@@ -17,9 +17,10 @@ jobs:
         uses: appleboy/ssh-action@master 
         with:
           host: 35.232.212.107
+          port: 22
           username: mahmoudashraf11179
           key: ${{ secrets.GCP_ILEARN }}
-          port: 22
+          passphrase: ${{ secrets.GCP_PASS }}
           script: |
             cd Schooly
             git pull origin master
