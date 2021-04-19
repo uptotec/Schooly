@@ -1,0 +1,36 @@
+name: Deploy ilearn to GCP
+
+on:
+  release:
+    types: [published]
+
+jobs:
+
+  getVersion:
+    name: get current repo version
+    runs-on: ubuntu-latest
+    steps:
+      - name: get-repo-version
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@master
+
+  deployToGCP:
+    name: Deploy ilearn to GCP
+    runs-on: ubuntu-latest
+    steps:
+      - name: connect to GCP with ssh
+        uses: appleboy/ssh-action@master 
+        with:
+          host: 35.232.212.107
+          username: mahmoudashraf11179
+          key: ${{ secrets.GCP_ILEARN }}
+          port: 22
+          script: |
+            cd Schooly
+            git pull origin master
+            yarn run build:since
+            docker stop schooly
+            docker remove schooly
+            docker build -t uptotec/schooly:latest .
+            docker run -p 4000:4000 --net="host" --restart on-failure -d --name schooly uptotec/schooly:latest
+

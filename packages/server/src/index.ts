@@ -78,13 +78,13 @@ import { sessionResolver } from './resolvers/session/sessionResolver';
 
   apolloServer.applyMiddleware({
     app,
-    // cors: {
-    //   origin: [
-    //     'http://localhost:3000',
-    //     process.env.SITE_URL || 'http://192.168.1.5:3000',
-    //   ],
-    //   credentials: true,
-    // },
+    cors:
+      environment === 'production'
+        ? undefined
+        : {
+            origin: ['http://localhost:3000'],
+            credentials: true,
+          },
   });
 
   if (environment === 'production' && process.env.SERVE_FRONT === 'true') {
