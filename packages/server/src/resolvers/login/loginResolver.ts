@@ -52,7 +52,9 @@ export class loginResolver {
       relations: ['facility', 'class', 'group'],
     });
 
-    if (!student) return undefined;
+    if (!student) {
+      return undefined;
+    }
 
     const valid = await bcrypt.compare(password, student.password);
 
