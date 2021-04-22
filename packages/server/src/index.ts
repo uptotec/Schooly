@@ -71,7 +71,10 @@ import { sessionResolver } from './resolvers/session/sessionResolver';
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         maxAge: 1000 * 60 * 60 * 24 * 7 * 52 * 7,
-        domain: process.env.SITE_DOMAIN || 'localhost',
+        domain:
+          process.env.NODE_ENV === 'production'
+            ? process.env.SITE_DOMAIN
+            : undefined,
       },
     })
   );
@@ -82,7 +85,7 @@ import { sessionResolver } from './resolvers/session/sessionResolver';
       environment === 'production'
         ? undefined
         : {
-            origin: ['http://localhost:3000'],
+            origin: ['http://localhost:3000', 'http://192.168.1.40:3000'],
             credentials: true,
           },
   });

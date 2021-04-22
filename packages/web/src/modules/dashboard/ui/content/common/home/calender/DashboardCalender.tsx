@@ -52,7 +52,7 @@ export const DashboardCalender = () => {
         <Col>
           <Title level={2}>Calender</Title>
         </Col>
-        {userType === userTypes.staff ? (
+        {/* {userType === userTypes.staff ? (
           <Col>
             <Button
               className="ShadowBox"
@@ -72,7 +72,7 @@ export const DashboardCalender = () => {
           </Col>
         ) : (
           () => null
-        )}
+        )} */}
       </Row>
       <Row gutter={[25, 25]}>
         <Col flex="450px">

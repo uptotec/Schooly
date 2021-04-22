@@ -2,7 +2,10 @@ import { OnlineSessionControllerData, useUserStore } from '@schooly/controller';
 import * as React from 'react';
 import Jitsi from 'react-jitsi';
 import { RouteComponentProps } from 'react-router-dom';
+import { isMobile } from 'react-device-detect';
+
 import { LoadingSpinner } from '../../shared/loadingSpinner';
+import { openInNewTab } from '../../dashboard/ui/content/common/home/sessions/utils';
 
 export const OnlineSession = ({
   match,
@@ -17,6 +20,12 @@ export const OnlineSession = ({
   }
 
   if (!loading && data && data.sessionJWT) {
+    if (isMobile) {
+      window.open(
+        `https://meet.schooly.tk/${id}?jwt=${data.sessionJWT}`,
+        '_self'
+      );
+    }
     return (
       <>
         <Jitsi

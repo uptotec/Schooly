@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { Button, Col, Progress, Row, Typography } from 'antd';
 import { Timetable, useUserStore } from '@schooly/controller';
+import { userTypes } from '@schooly/common';
 
 import { formatAMPM, openInNewTab } from '../utils';
 
 import styles from './LiveSessionCard.module.css';
 import { FaRegBuilding } from 'react-icons/fa';
 import { CgMediaLive } from 'react-icons/cg';
-import { userTypes } from '@schooly/common';
 
 const { Title, Text } = Typography;
 
