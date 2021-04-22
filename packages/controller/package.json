@@ -1,6 +1,6 @@
 {
   "name": "@schooly/controller",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "license": "MIT",
@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.3.7",
-    "@schooly/common": "^0.0.8",
+    "@schooly/common": "^0.0.9",
     "@types/react": "^17.0.3",
     "graphql": "^15.5.0",
     "react": "^17.0.1",

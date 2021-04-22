@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.9](https://github.com/uptotec/Schooly/compare/v0.0.8...v0.0.9) (2021-04-22)
+
+
+### Bug Fixes
+
+* **web:** :zap: fixed mobile overheating problem ([41725f3](https://github.com/uptotec/Schooly/commit/41725f352c895102e854d0abbbc4fde7ae29b588))
+
+
+
+
+
 ## [0.0.8](https://github.com/uptotec/Schooly/compare/v0.0.7...v0.0.8) (2021-04-19)
 
 **Note:** Version bump only for package Schooly
