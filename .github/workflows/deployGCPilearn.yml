@@ -26,6 +26,7 @@ jobs:
             eval $(ssh-agent -s)
             ssh-add github_key
             cd Schooly/
+            git checkout .
             git pull origin master
             yarn install
             yarn run build:all

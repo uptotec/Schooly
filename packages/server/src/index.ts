@@ -85,7 +85,7 @@ import { sessionResolver } from './resolvers/session/sessionResolver';
       environment === 'production'
         ? undefined
         : {
-            origin: ['http://localhost:3000', 'http://192.168.1.40:3000'],
+            origin: ['http://localhost:3000'],
             credentials: true,
           },
   });
