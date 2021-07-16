@@ -17,6 +17,7 @@
     "codegen": "graphql-codegen --config codegen.yml",
     "build:server": "lerna run build --scope={@schooly/common,@schooly/server}",
     "build:web": "lerna run build --scope={@schooly/common,@schooly/controller,@schooly/web}",
+    "build:dev": "lerna run build --scope={@schooly/common,@schooly/controller}",
     "build:all": "lerna run build",
     "build:since": "lerna run build --since",
     "new-version": "lerna version --conventional-commits --yes"
