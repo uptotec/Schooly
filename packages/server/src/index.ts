@@ -7,15 +7,9 @@ import session from 'express-session';
 import connectRedis from 'connect-redis';
 import path from 'path';
 
-import { studentResolver } from './resolvers/student/studentResolver';
 import { redis } from './redis';
-import { loginResolver } from './resolvers/login/loginResolver';
 import { AuthCheckerFn } from './validators/authChecker';
-import { meResolver } from './resolvers/me/meResolver';
-import { logoutResolver } from './resolvers/logout/logoutResolver';
-import { onlineSessionResolver } from './resolvers/session/onlineSessionResolver';
-import { staffResolver } from './resolvers/staff/staffResolver';
-import { sessionResolver } from './resolvers/session/sessionResolver';
+import resolvers from './resolvers/index';
 
 (async () => {
   const app = express();
@@ -36,15 +30,7 @@ import { sessionResolver } from './resolvers/session/sessionResolver';
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [
-        studentResolver,
-        loginResolver,
-        meResolver,
-        logoutResolver,
-        onlineSessionResolver,
-        staffResolver,
-        sessionResolver,
-      ],
+      resolvers: resolvers,
       validate: true,
       authChecker: AuthCheckerFn,
     }),

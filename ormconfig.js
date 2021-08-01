@@ -6,7 +6,7 @@ module.exports = [
     username: "postgres",
     password: "Uptotec2001",
     database: "schooly",
-    synchronize: false,
+    synchronize: true,
     logging: false,
     entities: ["src/entity/**/*.ts"],
     migrations: ["src/migration/**/*.ts"],

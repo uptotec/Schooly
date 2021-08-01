@@ -8,7 +8,9 @@
     ],
     "nohoist": [
       "**/rimraf",
-      "**/rimraf/**"
+      "**/rimraf/**",
+      "**/babel-loader",
+      "**/babel-loader/**"
     ]
   },
   "scripts": {
